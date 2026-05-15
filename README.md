@@ -7,7 +7,7 @@ We made the GitHub repository, set it to public, then created a GitHub Project b
 
 2. URL of the Group Project Repository
 
-
+https://github.com/Herzan/Handcrafted-Haven-team14.git
 
 4. Design and Styling Evidence (Planning)
 Color Scheme (Warm, Earthy, Handcrafted Feel):
