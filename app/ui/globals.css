@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #73503C;
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+}
+header {
+  font-family: 'Quattrocento', serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Quattrocento', serif;
+  color: #73503C,
+}

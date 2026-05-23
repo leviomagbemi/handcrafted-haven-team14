@@ -1,41 +1,56 @@
-We made the GitHub repository, set it to public, then created a GitHub Project board. We added everyone as collaborators, and we started tossing around ideas for the design theme and the first batch of work items. Also, every member went ahead and cloned the repository on their own machines locally. And somewhere in the middle we picked the next group leader too, kinda quietly but still decided. Participants:
-•	Herzan Carcache
-•	Levi Omagbemi
-•	Rocio Maryorie Apaza Paricahua
-•	Lawrence Okon
-•	Eseoghene Jacob Gbunoghene
+# Wdd430GroupProject
 
-2. URL of the Group Project Repository
+Handcrafted Haven is an innovative web application that aims to provide a platform for artisans and crafters to showcase and sell their unique handcrafted items. It serves as a virtual marketplace, connecting talented creators with potential customers who appreciate the beauty and quality of handmade products. The application focuses on fostering a sense of community, supporting local artisans, and promoting sustainable consumption.
 
-https://github.com/Herzan/Handcrafted-Haven-team14.git
+Handcrafted Haven aims to revolutionize the way handcrafted items are discovered, appreciated, and acquired. By providing a digital platform for artisans to showcase their creativity and connect with a broader audience, the web application fosters a thriving community of passionate creators and conscious consumers. With its user-friendly features, secure e-commerce capabilities, and emphasis on customization and community engagement, Handcrafted Haven is set to become the go-to destination for those seeking unique, handcrafted treasures.
 
-4. Design and Styling Evidence (Planning)
-Color Scheme (Warm, Earthy, Handcrafted Feel):
-•	Primary: #5C4033 (Warm Brown / Coffee)
-•	Secondary: #D4A017 (Gold / Mustard)
-•	Accent: #228B22 (Forest Green)
-•	Background: #F5F0E6 (Cream / Off-white)
-•	Text: #2F2F2F (Dark Charcoal)
-Typography:
-•	Headings: Playfair Display (elegant serif)
-•	Body: Inter or Poppins (clean sans-serif)
-Overall Style:
-•	Soft, natural, artisan aesthetic with warm tones
-•	Handcrafted texture elements (subtle paper/watercolor backgrounds)
-•	Rounded corners, generous whitespace, card-based product layout
-•	Mobile-first responsive design
-________________________________________
-5. User Stories & Work Items (Minimum 10)
-User Stories & Work Items Brainstorming:
-1.	Setup Project Repository - Create public GitHub repository, initialize GitHub Project board (Kanban), and invite all team members as collaborators.
-2.	Initialize Next.js Application - Set up a new Next.js 14+ project with TypeScript and Tailwind CSS for the frontend.
-3.	Create Design System & Theme - Define color palette, typography, buttons, cards, and Tailwind configuration to establish consistent branding.
-4.	Build Homepage - Design and implement the landing page with hero section, featured products, and artisan spotlight.
-5.	Develop Product Catalog Page - Create a product browsing page with grid layout, search, and filters (category, price, etc.).
-6.	Product Detail Page - Build individual product pages showing images, description, price, add to cart, and reviews.
-7.	Seller Profile Pages - Create artisan profile pages displaying bio, story, and their listed products.
-8.	User Authentication System - Implement user registration and login (sellers and buyers).
-9.	Add New Product Functionality - Create a form for authenticated sellers to add handcrafted items with images and details.
-10.	Shopping Cart System - Implement add to cart, view cart, update quantities, and persist cart data.
-11.	Reviews & Ratings System - Allow users to leave star ratings and written reviews on products.
-12.	Responsive Navigation & Footer - Build a mobile-friendly navbar with menu and a consistent footer across all pages.
+David Adalberto Aviles
+Kate Christensen
+Mariana Eiterer Overbay
+Blake Kimball Torres
+Kimberly Leann Torres
+
+Technology required for project.
+
+Front-End: HTML, CSS, JavaScript, Next.js
+Back-End: Node.js, a database
+Project Management: GitHub Boards
+Code Management: Git and GitHub Repository
+Deployment / Cloud Platform: Vercel
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
