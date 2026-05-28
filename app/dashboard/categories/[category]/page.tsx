@@ -13,14 +13,16 @@ export default async function Page({
   params,
   searchParams,
 }: {
-  params: { category: string };
-  searchParams?: {
+  params: Promise<{ category: string }>;
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) {
-  const category = params.category;
-  const query = searchParams?.query || "";
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  const category = resolvedParams.category;
+  const query = resolvedSearchParams?.query || "";
   const items = await filteredCategory(category, query);
   let title = "";
 

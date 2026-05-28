@@ -13,12 +13,13 @@ export const metadata: Metadata = {
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) {
-  const query = searchParams?.query || "";
+  const resolvedSearchParams = await searchParams;
+  const query = resolvedSearchParams?.query || "";
   const artisans = await fetchArtisan();
   
   return (

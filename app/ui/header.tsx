@@ -2,7 +2,7 @@
 
 import React, { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import logo from "/public/images/hh-logo.png";
+import logo from "../../public/images/hh-logo.png";
 import NavLinks from "@/app/ui/dashboard/nav-links";
 import { UserCircleIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";

@@ -2,346 +2,359 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { 
-  CheckBadgeIcon, 
-  SparklesIcon, 
   HeartIcon, 
-  ArrowRightIcon 
+  PlusIcon,
+  ShieldCheckIcon,
+  UserGroupIcon,
+  ArrowRightIcon
 } from "@heroicons/react/24/outline";
 
-// CURATED STATIC IMAGES FOR THE LANDING PAGE
-import heroImage from "/public/images/artisanal_haven_hero.png";
-import vaseImage from "/public/images/hand_thrown_ceramic_vase.png";
-import blanketImage from "/public/images/artisan_woven_wool_blanket.png";
-import boardImage from "/public/images/hand_carved_walnut_serving_board.png";
+// IMAGE IMPORTS FOR THE EXACT SECTIONS
+import heroBg from "../public/images/artisanal_haven_hero.png";
 
-// CATEGORIES IMAGES (ALREADY PRESENT IN PROJECT)
-import decorCat from "/public/images/homedecor.png";
-import textilesCat from "/public/images/textiles.png";
-import artCat from "/public/images/art.png";
-import accessoriesCat from "/public/images/accessories.png";
+// ARTISAN PORTRAITS
+import elenaPortrait from "../public/images/elena_rostova_artisan.png";
+import marcusPortrait from "../public/images/marcus_thorne_hands.png";
+import sarahPortrait from "../public/images/sarah_jenkins_hands.png";
+
+// PRODUCT IMAGES
+import mugProduct from "../public/images/hand_thrown_ceramic_vase.png";
+import blanketProduct from "../public/images/artisan_woven_wool_blanket.png";
+import boardProduct from "../public/images/hand_carved_walnut_serving_board.png";
+import ringProduct from "../public/images/raw_stone_signet_ring.png";
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col gap-24 pb-24 bg-background text-on-surface">
       
-      {/* 1. HERO SECTION (Editorial, sun-drenched, spacious) */}
-      <section className="relative overflow-hidden bg-beige/45 py-20 lg:py-28" aria-labelledby="hero-title">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Hero Text Content */}
-          <div className="lg:col-span-6 flex flex-col gap-6 text-left">
-            <div className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary tracking-wider uppercase font-sans">
-              <SparklesIcon className="h-4 w-4" />
-              Verified Handcrafted Haven
-            </div>
-            <h1 id="hero-title" className="font-serif text-5xl sm:text-6xl font-bold tracking-tight text-on-surface leading-[1.1]">
-              Human-Centric <br />
-              <span className="text-primary italic font-normal font-serif">Artisanal Craft</span>
-            </h1>
-            <p className="font-sans text-lg sm:text-xl text-on-surface/85 leading-relaxed max-w-xl">
-              Bridging the gap between raw, tactile artistry and refined home aesthetics. 
-              We source and verify the finest pieces handmade by independent master artisans around the globe.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-4">
-              <Link
-                href="/dashboard/categories"
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-md text-white bg-primary hover:bg-primary-container transition-colors shadow-md shadow-primary/10 font-sans"
-              >
-                Shop Collection
-              </Link>
-              <Link
-                href="/dashboard/story"
-                className="inline-flex items-center justify-center px-6 py-3 border border-outline hover:border-primary text-base font-semibold rounded-md text-on-surface hover:text-primary transition-colors font-sans"
-              >
-                Meet Our Artisans
-              </Link>
-            </div>
-          </div>
-
-          {/* Hero Visual Image (Generated Editorial Masterpiece) */}
-          <div className="lg:col-span-6">
-            <div className="relative h-[400px] sm:h-[500px] w-full rounded-2xl overflow-hidden border border-outline-variant/60 shadow-2xl shadow-on-surface/5 group">
-              <Image
-                src={heroImage}
-                alt="Beautiful curated handcrafted clay pottery and wool blanket styling"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-                className="object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-              />
-            </div>
-          </div>
-
+      {/* 1. HERO SECTION (Full-height backdropped support local artistry block) */}
+      <section className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden" aria-labelledby="hero-title">
+        {/* Background Image with warm overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={heroBg}
+            alt="Warm artisanal ceramic studio filled with handcrafted pottery wares"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover object-center opacity-85"
+          />
+          {/* Subtle nature-inspired gradients for editorial feeling */}
+          <div className="absolute inset-0 bg-[#faf9f7]/40 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         </div>
-      </section>
 
-      {/* 2. BRAND VALUES SECTION (Standard boutique features) */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Our Philosophy">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          <div className="flex flex-col gap-4 p-8 rounded-xl bg-white border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <CheckBadgeIcon className="h-6 w-6" />
-            </div>
-            <h3 className="font-serif text-xl font-bold">100% Authentic Handcraft</h3>
-            <p className="font-sans text-sm text-on-surface/80 leading-relaxed">
-              Every single product listed on our platform is verified as entirely handmade by independent artisans, rejecting mass manufacturing.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-4 p-8 rounded-xl bg-white border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <SparklesIcon className="h-6 w-6" />
-            </div>
-            <h3 className="font-serif text-xl font-bold">Sustainable Materials</h3>
-            <p className="font-sans text-sm text-on-surface/80 leading-relaxed">
-              We prioritize organic, sustainable, and locally sourced materials, ensuring low environmental impact and healthy home utility.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-4 p-8 rounded-xl bg-white border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
-            <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <HeartIcon className="h-6 w-6" />
-            </div>
-            <h3 className="font-serif text-xl font-bold">Intentional Softness</h3>
-            <p className="font-sans text-sm text-on-surface/80 leading-relaxed">
-              Celebrating unique characteristics and minor irregularities that define human craftsmanship, creating warmth in your physical spaces.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 3. BROWSE BY CATEGORY SECTION (Standard Next.js Link Structure) */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-12" aria-labelledby="category-title">
-        <div className="text-center max-w-xl mx-auto flex flex-col gap-3">
-          <h2 id="category-title" className="font-serif text-3xl sm:text-4xl font-bold">Browse by Category</h2>
-          <p className="font-sans text-sm sm:text-base text-on-surface/80">
-            Explore authentic wares organized by craft type. Every category houses unique artisan stories and creations.
+        {/* Hero Content */}
+        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center flex flex-col items-center gap-6">
+          <h1 id="hero-title" className="font-serif text-5xl sm:text-6xl font-bold tracking-tight text-primary leading-[1.15] drop-shadow-sm">
+            Support Local Artistry
+          </h1>
+          <p className="font-sans text-base sm:text-lg text-on-surface-variant leading-relaxed max-w-2xl">
+            Discover unique, handcrafted pieces made with passion and purpose. Bring the warmth of authentic craftsmanship into your everyday life.
           </p>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          {/* Decor Category Card */}
-          <Link href="/dashboard/categories/Decor" className="group flex flex-col gap-4 text-center">
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-outline-variant bg-white">
-              <Image
-                src={decorCat}
-                alt="Beautiful home decor handcrafted items"
-                fill
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-              />
-            </div>
-            <h3 className="font-serif text-lg font-bold group-hover:text-primary transition-colors flex items-center justify-center gap-1">
-              Home Decor
-              <ArrowRightIcon className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </h3>
-          </Link>
-
-          {/* Textiles Category Card */}
-          <Link href="/dashboard/categories/textiles" className="group flex flex-col gap-4 text-center">
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-outline-variant bg-white">
-              <Image
-                src={textilesCat}
-                alt="Finely woven blankets and natural linen textiles"
-                fill
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-              />
-            </div>
-            <h3 className="font-serif text-lg font-bold group-hover:text-primary transition-colors flex items-center justify-center gap-1">
-              Textiles
-              <ArrowRightIcon className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </h3>
-          </Link>
-
-          {/* Art Category Card */}
-          <Link href="/dashboard/categories/art" className="group flex flex-col gap-4 text-center">
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-outline-variant bg-white">
-              <Image
-                src={artCat}
-                alt="Art and framed prints handmade by independent illustrators"
-                fill
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-              />
-            </div>
-            <h3 className="font-serif text-lg font-bold group-hover:text-primary transition-colors flex items-center justify-center gap-1">
-              Art & Prints
-              <ArrowRightIcon className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </h3>
-          </Link>
-
-          {/* Accessories Category Card */}
-          <Link href="/dashboard/categories/accessories" className="group flex flex-col gap-4 text-center">
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-outline-variant bg-white">
-              <Image
-                src={accessoriesCat}
-                alt="Artisanal personal and home decorative accessories"
-                fill
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-              />
-            </div>
-            <h3 className="font-serif text-lg font-bold group-hover:text-primary transition-colors flex items-center justify-center gap-1">
-              Accessories
-              <ArrowRightIcon className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </h3>
-          </Link>
-
+          <div className="mt-4">
+            <Link
+              href="/dashboard/categories"
+              className="inline-flex items-center justify-center px-10 py-4 border border-transparent text-base font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md font-sans"
+            >
+              Shop the Collection
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* 4. FEATURED PRODUCTS SECTION (High-end product showcase cards) */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-12" aria-labelledby="featured-title">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-outline-variant pb-6">
-          <div className="flex flex-col gap-2">
-            <h2 id="featured-title" className="font-serif text-3xl sm:text-4xl font-bold">Featured Creations</h2>
-            <p className="font-sans text-sm sm:text-base text-on-surface/85 max-w-lg">
-              Explore outstanding works representing exceptional design, texture, and organic craft.
+      {/* 2. FEATURED ARTISANS SECTION (Exactly matching the 3 columns in the image) */}
+      <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 flex flex-col gap-12" aria-labelledby="artisans-title">
+        <div className="flex justify-between items-end border-b border-outline-variant/60 pb-6">
+          <div className="flex flex-col gap-2 text-left">
+            <h2 id="artisans-title" className="font-serif text-3xl sm:text-4xl font-bold text-primary">
+              Featured Artisans
+            </h2>
+            <p className="font-sans text-sm text-on-surface-variant">
+              Meet the hands behind the craft.
             </p>
           </div>
           <Link 
-            href="/dashboard/categories" 
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-secondary transition-colors"
+            href="/dashboard/story" 
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-secondary hover:text-secondary/80 transition-colors font-sans"
           >
-            Explore all products
+            View all artisans
             <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          {/* Card 1: Vase */}
-          <div className="group flex flex-col bg-white border border-outline-variant rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div className="relative aspect-square w-full bg-beige/35 overflow-hidden">
+          {/* Artisan 1: Elena Rostova */}
+          <div className="flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group">
+            <div className="relative aspect-[4/3] w-full bg-beige/35 overflow-hidden">
               <Image
-                src={vaseImage}
-                alt="Hand-thrown sage green clay vase with natural organic waves"
+                src={elenaPortrait}
+                alt="Elena Rostova artisan weaver portrait"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
               />
             </div>
-            <div className="p-6 flex flex-col gap-3">
-              <span className="font-sans text-xs font-semibold text-primary uppercase tracking-widest">Decor</span>
-              <h3 className="font-serif text-xl font-bold group-hover:text-primary transition-colors">
-                Hand-Thrown Sage Green Vase
-              </h3>
-              <p className="font-sans text-sm text-on-surface/80 leading-relaxed line-clamp-2">
-                Meticulously spun from high-fire local red clay and dipped in our signature semi-matte sage glaze.
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <span className="font-sans text-lg font-bold">$85.00</span>
-                <span className="text-xs font-bold text-secondary tracking-widest uppercase group-hover:text-primary transition-colors">
-                  View Detail
-                </span>
+            <div className="p-6 flex flex-col gap-4 text-left">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-full bg-[#efeeec] flex items-center justify-center border border-outline-variant/60 font-serif text-xs font-bold text-primary shadow-sm">
+                  HH
+                </div>
+                <h3 className="font-serif text-xl font-bold text-primary">Elena Rostova</h3>
               </div>
+              <p className="font-sans text-sm text-on-surface-variant leading-relaxed italic">
+                &ldquo;Working with natural fibers connects me to the earth. Every piece I weave tells a story of patience and respect for traditional techniques passed down through generations.&rdquo;
+              </p>
             </div>
           </div>
 
-          {/* Card 2: Blanket */}
-          <div className="group flex flex-col bg-white border border-outline-variant rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div className="relative aspect-square w-full bg-beige/35 overflow-hidden">
+          {/* Artisan 2: Marcus Thorne */}
+          <div className="flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group">
+            <div className="relative aspect-[4/3] w-full bg-beige/35 overflow-hidden">
               <Image
-                src={blanketImage}
-                alt="Thick heavy handwoven wool blanket in warm terracotta and sand colored stripes"
+                src={marcusPortrait}
+                alt="Marcus Thorne wood sculptor hands carving"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
               />
             </div>
-            <div className="p-6 flex flex-col gap-3">
-              <span className="font-sans text-xs font-semibold text-primary uppercase tracking-widest">Textiles</span>
-              <h3 className="font-serif text-xl font-bold group-hover:text-primary transition-colors">
-                Artisan Terracotta Wool Blanket
-              </h3>
-              <p className="font-sans text-sm text-on-surface/80 leading-relaxed line-clamp-2">
-                Handwoven on traditional floor looms in pure local organic wool. Provides substantial warmth and weighted texture.
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <span className="font-sans text-lg font-bold">$120.00</span>
-                <span className="text-xs font-bold text-secondary tracking-widest uppercase group-hover:text-primary transition-colors">
-                  View Detail
-                </span>
+            <div className="p-6 flex flex-col gap-4 text-left">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-full bg-[#efeeec] flex items-center justify-center border border-outline-variant/60 font-serif text-xs font-bold text-primary shadow-sm">
+                  HH
+                </div>
+                <h3 className="font-serif text-xl font-bold text-primary">Marcus Thorne</h3>
               </div>
+              <p className="font-sans text-sm text-on-surface-variant leading-relaxed italic">
+                &ldquo;I source all my timber locally, ensuring that each fallen tree finds a second life as functional art. The grain dictates the final form of every bowl and board.&rdquo;
+              </p>
             </div>
           </div>
 
-          {/* Card 3: Woodboard */}
-          <div className="group flex flex-col bg-white border border-outline-variant rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div className="relative aspect-square w-full bg-beige/35 overflow-hidden">
+          {/* Artisan 3: Sarah Jenkins */}
+          <div className="flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group">
+            <div className="relative aspect-[4/3] w-full bg-beige/35 overflow-hidden">
               <Image
-                src={boardImage}
-                alt="Minimalist product photo of a solid walnut wood carving board with organic edges"
+                src={sarahPortrait}
+                alt="Sarah Jenkins clay ceramist hands shaping"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
               />
             </div>
-            <div className="p-6 flex flex-col gap-3">
-              <span className="font-sans text-xs font-semibold text-primary uppercase tracking-widest">Accessories</span>
-              <h3 className="font-serif text-xl font-bold group-hover:text-primary transition-colors">
-                Hand-Carved Walnut Serving Board
-              </h3>
-              <p className="font-sans text-sm text-on-surface/80 leading-relaxed line-clamp-2">
-                Naturally cured, single-slab solid walnut wood. Features soft organic sanded edges and deep, polished grain.
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <span className="font-sans text-lg font-bold">$65.00</span>
-                <span className="text-xs font-bold text-secondary tracking-widest uppercase group-hover:text-primary transition-colors">
-                  View Detail
-                </span>
+            <div className="p-6 flex flex-col gap-4 text-left">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-full bg-[#efeeec] flex items-center justify-center border border-outline-variant/60 font-serif text-xs font-bold text-primary shadow-sm">
+                  HH
+                </div>
+                <h3 className="font-serif text-xl font-bold text-primary">Sarah Jenkins</h3>
               </div>
+              <p className="font-sans text-sm text-on-surface-variant leading-relaxed italic">
+                &ldquo;Ceramics is a dialogue between intention and the unpredictable nature of fire. I embrace the perfect imperfections that make each glazed mug truly one-of-a-kind.&rdquo;
+              </p>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* 5. ARTISAN SPOTLIGHT SECTION (Elena Rossi story card) */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12" aria-labelledby="spotlight-title">
-        <div className="bg-white border border-outline-variant rounded-2xl overflow-hidden shadow-lg shadow-on-surface/5 grid grid-cols-1 lg:grid-cols-12">
+      {/* 3. TRENDING NOW SECTION (Precisely matching the 4 grid product cards in the image) */}
+      <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-12" aria-labelledby="trending-title">
+        <div className="text-center">
+          <h2 id="trending-title" className="font-serif text-3xl sm:text-4xl font-bold text-primary">
+            Trending Now
+          </h2>
           
-          {/* Spotlight Story */}
-          <div className="lg:col-span-7 p-8 sm:p-12 md:p-16 flex flex-col gap-6 justify-center text-left">
-            <span className="font-sans text-xs font-semibold text-primary uppercase tracking-widest">
-              Artisan Spotlight
-            </span>
-            <h2 id="spotlight-title" className="font-serif text-3xl sm:text-4xl font-bold">
-              Elena Rossi
-            </h2>
-            <div className="inline-flex items-center gap-1.5 self-start px-2.5 py-0.5 rounded-full bg-secondary/10 border border-secondary/20 text-xs font-semibold text-secondary">
-              Verified Seller
+          {/* Filter Pills */}
+          <div className="flex flex-wrap justify-center gap-3 mt-6">
+            <button className="bg-[#efeeec] px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface transition-colors cursor-pointer">
+              All
+            </button>
+            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer">
+              Ceramics
+            </button>
+            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer">
+              Textiles
+            </button>
+            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer">
+              Woodwork
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Columns Products Grid */}
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          {/* Card 1: Speckled Sage Morning Mug */}
+          <div className="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative">
+            <button className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
+              <HeartIcon className="h-5 w-5" />
+            </button>
+            <div className="relative aspect-square w-full bg-[#efeeec]/35 overflow-hidden border-b border-outline-variant/40">
+              <Image
+                src={mugProduct}
+                alt="Speckled Sage Morning Mug by Sarah Jenkins"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+              />
             </div>
-            <blockquote className="font-serif text-lg sm:text-xl italic text-on-surface/90 leading-relaxed relative pl-4 border-l-2 border-primary">
-              &ldquo;Every single bowl and vase I spin carries a part of my story, a conversation with the natural clay and a moment of patient craft.&rdquo;
-            </blockquote>
-            <p className="font-sans text-sm sm:text-base text-on-surface/80 leading-relaxed">
-              Elena Rossi operates an independent ceramic studio nestled in the clay-rich hills of Tuscany. 
-              With over fifteen years of traditional training, she combines classic throwing techniques with modern, mineral-rich soft sage green glazes exclusive to Handcrafted Haven.
-            </p>
-            <div className="mt-4">
-              <Link 
-                href="/dashboard/story" 
-                className="inline-flex items-center justify-center px-5 py-3 text-sm font-semibold rounded-md text-white bg-primary hover:bg-primary-container transition-colors shadow-md shadow-primary/10"
-              >
-                Read Elena&apos;s Full Story
-              </Link>
+            <div className="p-4 flex flex-col justify-between flex-grow gap-2 text-left relative">
+              <div className="flex flex-col gap-0.5">
+                <span className="font-sans text-[11px] font-semibold text-on-surface/50">Sarah Jenkins</span>
+                <h3 className="font-serif text-base font-bold text-primary group-hover:text-secondary transition-colors line-clamp-1">
+                  Speckled Sage Morning Mug
+                </h3>
+              </div>
+              <div className="flex justify-between items-center mt-2">
+                <span className="font-sans text-sm font-bold text-on-surface">$42.00</span>
+                <button className="h-8 w-8 rounded-lg border border-outline-variant/75 hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center text-primary/70 transition-all active:scale-95" aria-label="Add to cart">
+                  <PlusIcon className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Spotlight Visual Image */}
-          <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-[500px]">
-            <Image
-              src={vaseImage}
-              alt="Elena Rossi working with wet clay in her workshop studio"
-              fill
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover"
-            />
+          {/* Card 2: Earth Tone Linen Throw */}
+          <div className="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative">
+            <button className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
+              <HeartIcon className="h-5 w-5" />
+            </button>
+            <div className="relative aspect-square w-full bg-[#efeeec]/35 overflow-hidden border-b border-outline-variant/40">
+              <Image
+                src={blanketProduct}
+                alt="Earth Tone Linen Throw by Elena Rostova"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+              />
+            </div>
+            <div className="p-4 flex flex-col justify-between flex-grow gap-2 text-left relative">
+              <div className="flex flex-col gap-0.5">
+                <span className="font-sans text-[11px] font-semibold text-on-surface/50">Elena Rostova</span>
+                <h3 className="font-serif text-base font-bold text-primary group-hover:text-secondary transition-colors line-clamp-1">
+                  Earth Tone Linen Throw
+                </h3>
+              </div>
+              <div className="flex justify-between items-center mt-2">
+                <span className="font-sans text-sm font-bold text-on-surface">$125.00</span>
+                <button className="h-8 w-8 rounded-lg border border-outline-variant/75 hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center text-primary/70 transition-all active:scale-95" aria-label="Add to cart">
+                  <PlusIcon className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: Walnut Artisan Board */}
+          <div className="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative">
+            <button className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
+              <HeartIcon className="h-5 w-5" />
+            </button>
+            <div className="relative aspect-square w-full bg-[#efeeec]/35 overflow-hidden border-b border-outline-variant/40">
+              <Image
+                src={boardProduct}
+                alt="Walnut Artisan Board by Marcus Thorne"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+              />
+            </div>
+            <div className="p-4 flex flex-col justify-between flex-grow gap-2 text-left relative">
+              <div className="flex flex-col gap-0.5">
+                <span className="font-sans text-[11px] font-semibold text-on-surface/50">Marcus Thorne</span>
+                <h3 className="font-serif text-base font-bold text-primary group-hover:text-secondary transition-colors line-clamp-1">
+                  Walnut Artisan Board
+                </h3>
+              </div>
+              <div className="flex justify-between items-center mt-2">
+                <span className="font-sans text-sm font-bold text-on-surface">$85.00</span>
+                <button className="h-8 w-8 rounded-lg border border-outline-variant/75 hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center text-primary/70 transition-all active:scale-95" aria-label="Add to cart">
+                  <PlusIcon className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: Raw Stone Signet Ring */}
+          <div className="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative">
+            <button className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
+              <HeartIcon className="h-5 w-5" />
+            </button>
+            <div className="relative aspect-square w-full bg-[#efeeec]/35 overflow-hidden border-b border-outline-variant/40">
+              <Image
+                src={ringProduct}
+                alt="Raw Stone Signet Ring by Luna Silverworks"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+              />
+            </div>
+            <div className="p-4 flex flex-col justify-between flex-grow gap-2 text-left relative">
+              <div className="flex flex-col gap-0.5">
+                <span className="font-sans text-[11px] font-semibold text-on-surface/50">Luna Silverworks</span>
+                <h3 className="font-serif text-base font-bold text-primary group-hover:text-secondary transition-colors line-clamp-1">
+                  Raw Stone Signet Ring
+                </h3>
+              </div>
+              <div className="flex justify-between items-center mt-2">
+                <span className="font-sans text-sm font-bold text-on-surface">$110.00</span>
+                <button className="h-8 w-8 rounded-lg border border-outline-variant/75 hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center text-primary/70 transition-all active:scale-95" aria-label="Add to cart">
+                  <PlusIcon className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Explore All Button */}
+        <div className="mt-4">
+          <Link
+            href="/dashboard/categories"
+            className="inline-flex items-center justify-center px-10 py-3.5 border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-sans text-xs font-semibold tracking-wider rounded-full transition-all hover:scale-[1.02] active:scale-[0.98] uppercase"
+          >
+            Explore All Products
+          </Link>
+        </div>
+      </section>
+
+      {/* 4. VALUE PILLARS SECTION (Leaf/Shield, UserGroup, Check/Badge rounded icons) */}
+      <section className="border-t border-outline-variant/50 bg-[#efeeec]/30 py-24" aria-label="Why Shop With Us">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+          
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-16 w-16 flex items-center justify-center rounded-full bg-primary/10 text-primary border border-primary/20 shadow-sm">
+              {/* Eco Leaf Icon */}
+              <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 19c-3.866 0-7-3.134-7-7 0-3.866 3.134-7 7-7m0 14c3.866 0 7-3.134 7-7 0-3.866-3.134-7-7-7m0 14v-4m0-10C8.5 5 5 8.5 5 12c0 1.5.5 3 1.5 4.5m5.5-11c3.5 0 7 3.5 7 7c0 1.5-.5 3-1.5 4.5" />
+              </svg>
+            </div>
+            <h3 className="font-serif text-xl font-bold text-primary">Sustainable Practices</h3>
+            <p className="font-sans text-sm text-on-surface-variant leading-relaxed max-w-xs">
+              Our artisans prioritize ethically sourced materials and low-impact creation processes to protect our planet.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-16 w-16 flex items-center justify-center rounded-full bg-primary/10 text-primary border border-primary/20 shadow-sm">
+              <UserGroupIcon className="h-8 w-8" />
+            </div>
+            <h3 className="font-serif text-xl font-bold text-primary">Community First</h3>
+            <p className="font-sans text-sm text-on-surface-variant leading-relaxed max-w-xs">
+              By shopping here, you directly support independent creators and help preserve traditional crafting skills.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-16 w-16 flex items-center justify-center rounded-full bg-primary/10 text-primary border border-primary/20 shadow-sm">
+              <ShieldCheckIcon className="h-8 w-8" />
+            </div>
+            <h3 className="font-serif text-xl font-bold text-primary">Heirloom Quality</h3>
+            <p className="font-sans text-sm text-on-surface-variant leading-relaxed max-w-xs">
+              We curate items designed not just for a season, but to be cherished and passed down through generations.
+            </p>
           </div>
 
         </div>
