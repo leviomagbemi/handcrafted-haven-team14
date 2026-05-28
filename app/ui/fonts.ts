@@ -1,7 +1,14 @@
-import { Quattrocento, Roboto, Shadows_Into_Light } from 'next/font/google';
+import { Libre_Caslon_Text, Inter } from 'next/font/google';
 
-const roboto = Roboto({ weight: ['400', '700'], subsets: ['latin'] });
-const shadows = Shadows_Into_Light({ weight: '400', subsets: ['latin'] });
-const quattrocento = Quattrocento({ weight: ['400', '700'], subsets: ['latin'] });
+export const libreCaslonText = Libre_Caslon_Text({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  variable: '--font-libre-caslon-text',
+});
 
-export { quattrocento, roboto, shadows };
+export const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
+});
