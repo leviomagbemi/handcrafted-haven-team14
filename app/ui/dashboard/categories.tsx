@@ -3,7 +3,7 @@ import Image from "next/image";
 import { fetchCategory } from "@/app/lib/data";
 
 export default async function CatLinks() {
-  const homeCategory = await fetchCategory("Decor");
+  const homeCategory = await fetchCategory("decor");
   const textilesCategory = await fetchCategory("textiles");
   const artCategory = await fetchCategory("art");
   const accessoriesCategory = await fetchCategory("accessories");
@@ -27,19 +27,19 @@ export default async function CatLinks() {
 
   return (
     <>
-      {/* Home Decor */}
+      {/* Home decor */}
       <Link
         key="home"
         href={`/dashboard/categories/${homeCategory[0].category}`}
       >
         <Image
           src={homeCategory[0].image_url}
-          alt="Home Decor"
+          alt="Home decor"
           className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]"
           width={400}
           height={350}
         />
-        <p className="text-2xl">Home Decor</p>
+        <p className="text-2xl">Home decor</p>
       </Link>
 
       {/* Textiles */}

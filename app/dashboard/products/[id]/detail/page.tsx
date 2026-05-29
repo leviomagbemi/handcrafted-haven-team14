@@ -1,18 +1,7 @@
-import { Metadata } from 'next';
-import ProductDetail from '@/app/ui/dashboard/productDetail';
-import { useParams } from 'react-router-dom';
+// app/dashboard/products/[id]/detail/page.tsx
 
-export const metadata: Metadata = {
-  title: 'Add Product',
-};
+import ProductDetail from "@/app/ui/dashboard/productDetail";
 
-export default function Page({params}: {params: {id: string}}) {
-  const id = params.id;
-  
-  return (
-    <>
-      {/* @ts-expect-error Async Server Component */}
-      <ProductDetail params={id} />
-    </>
-)
+export default function Page({ params }: { params: { id: string } }) {
+  return <ProductDetail id={params.id} />;
 }

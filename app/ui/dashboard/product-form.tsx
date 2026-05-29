@@ -6,12 +6,13 @@ import Button from "@/app/ui/button";
 import { createProduct } from "../../lib/actions";
 import { useFormState } from "react-dom";
 
-const category = [
+const categories = [
   { id: "decor", name: "Home Decor" },
   { id: "accessories", name: "Accessories" },
   { id: "art", name: "Art" },
   { id: "textiles", name: "Textiles" },
 ];
+
 export default function AddProductForm({
   artisans,
 }: {
@@ -19,20 +20,20 @@ export default function AddProductForm({
 }) {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(createProduct, initialState);
-  console.log(dispatch);
+
   return (
     <form action={dispatch}>
-      <div className=" rounded-md bg-tan p-4 md:p-6 text-darkBrown">
-        {/* Artisan Name */}
+      <div className="rounded-md bg-tan p-4 md:p-6 text-darkBrown">
+        {/* Artisan */}
         <div className="mb-4">
-          <label htmlFor="artist" className="mb-2 block text-2xl">
+          <label htmlFor="artisan_id" className="mb-2 block text-2xl font-medium">
             Choose Artist
           </label>
           <div className="relative">
             <select
               id="artisan_id"
               name="artisan_id"
-              className="peer block w-full cursor-pointer rounded-md border  border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
+              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
               defaultValue=""
               aria-describedby="artisan-error"
             >
@@ -59,47 +60,40 @@ export default function AddProductForm({
         {/* Title */}
         <div className="mb-4">
           <label htmlFor="title" className="mb-2 block text-2xl font-medium">
-            Enter a Product Title
+            Product Title
           </label>
-          <div className="relative mt-2 rounded-md">
-            <div className="relative">
-              <input
-                id="title"
-                name="title"
-                type="string"
-                placeholder="Enter Title"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="title-error"
-              />
-              <div id="title-error" aria-live="polite" aria-atomic="true">
-                {state.errors?.title &&
-                  state.errors.title.map((error: string) => (
-                    <p className="mt-2 text-sm text-red-500" key={error}>
-                      {error}
-                    </p>
-                  ))}
-              </div>
-            </div>
+          <input
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Enter title"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
+            aria-describedby="title-error"
+          />
+          <div id="title-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.title &&
+              state.errors.title.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
           </div>
         </div>
+
         {/* Price */}
         <div className="mb-4">
-          <label htmlFor="title" className="mb-2 block text-2xl font-medium">
-            Enter a Price
+          <label htmlFor="price" className="mb-2 block text-2xl font-medium">
+            Price
           </label>
-          <div className="relative mt-2 rounded-md">
-            <div className="relative">
-              <input
-                id="price"
-                name="price"
-                type="number"
-                step=".01"
-                placeholder="Enter Price"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="price-error"
-              />
-            </div>
-          </div>
+          <input
+            id="price"
+            name="price"
+            type="number"
+            step="0.01"
+            placeholder="Enter price"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
+            aria-describedby="price-error"
+          />
           <div id="price-error" aria-live="polite" aria-atomic="true">
             {state.errors?.price &&
               state.errors.price.map((error: string) => (
@@ -109,24 +103,25 @@ export default function AddProductForm({
               ))}
           </div>
         </div>
+
         {/* Category */}
-        <label htmlFor="artist" className="mb-2 block text-2xl">
-          Choose a Category
-        </label>
         <div className="mb-4">
+          <label htmlFor="category" className="mb-2 block text-2xl font-medium">
+            Category
+          </label>
           <select
             id="category"
             name="category"
-            className="peer block w-full cursor-pointer rounded-md border  border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
+            className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
             defaultValue=""
             aria-describedby="category-error"
           >
             <option value="" disabled>
-              Select a Category
+              Select a category
             </option>
-            {category.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
               </option>
             ))}
           </select>
@@ -139,65 +134,57 @@ export default function AddProductForm({
               ))}
           </div>
         </div>
+
         {/* Description */}
         <div className="mb-4">
-          <label htmlFor="title" className="mb-2 block text-2xl font-medium">
-            Enter a Description
+          <label htmlFor="description" className="mb-2 block text-2xl font-medium">
+            Description
           </label>
-          <div className="relative mt-2 rounded-md">
-            <div className="relative">
-              <textarea
-                id="description"
-                name="description"
-                placeholder="Enter item description"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="description-error"
-              />
-              <div id="description-error" aria-live="polite" aria-atomic="true">
-                {state.errors?.description &&
-                  state.errors.description.map((error: string) => (
-                    <p className="mt-2 text-sm text-red-500" key={error}>
-                      {error}
-                    </p>
-                  ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Image */}
-        <div className="mb-4">
-          <label htmlFor="title" className="mb-2 block text-2xl font-medium">
-            Enter a URL for the image
-          </label>
-          <div className="relative mt-2 rounded-md">
-            <div className="relative">
-              <input
-                id="image_url"
-                name="image_url"
-                type="string"
-                placeholder="Enter url"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="image-error"
-              />
-            </div>
-            <div id="image-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.description &&
-                state.errors.description.map((error: string) => (
-                  <p className="mt-2 text-sm text-red-500" key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Enter product description"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown min-h-[120px]"
+            aria-describedby="description-error"
+          />
+          <div id="description-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.description &&
+              state.errors.description.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
           </div>
         </div>
 
-        {/*  Status */}
-        <fieldset>
-          <legend className="mb-2 block text-2xl font-medium">
-            Set the status
-          </legend>
-          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
-            <div className="flex gap-4 justify-evenly">
+        {/* Image URL */}
+        <div className="mb-4">
+          <label htmlFor="image_url" className="mb-2 block text-2xl font-medium">
+            Image URL
+          </label>
+          <input
+            id="image_url"
+            name="image_url"
+            type="url"
+            placeholder="https://example.com/image.jpg"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
+            aria-describedby="image-error"
+          />
+          <div id="image-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.image_url &&
+              state.errors.image_url.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
+        </div>
+
+        {/* Status */}
+        <fieldset className="mb-6">
+          <legend className="mb-2 block text-2xl font-medium">Status</legend>
+          <div className="rounded-md border border-gray-200 bg-white px-4 py-3">
+            <div className="flex gap-6 justify-center">
               <div className="flex items-center">
                 <input
                   id="available"
@@ -208,11 +195,12 @@ export default function AddProductForm({
                 />
                 <label
                   htmlFor="available"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-tan bg-opacity-50 px-3 py-1.5 text-xl  text-gray-600"
+                  className="ml-2 cursor-pointer text-xl text-gray-700"
                 >
                   Available
                 </label>
               </div>
+
               <div className="flex items-center">
                 <input
                   id="unavailable"
@@ -223,7 +211,7 @@ export default function AddProductForm({
                 />
                 <label
                   htmlFor="unavailable"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-tan bg-opacity-50 px-3 py-1.5 text-xl  text-gray-600"
+                  className="ml-2 cursor-pointer text-xl text-gray-700"
                 >
                   Unavailable
                 </label>
@@ -232,10 +220,11 @@ export default function AddProductForm({
           </div>
         </fieldset>
       </div>
+
       <div className="mt-6 flex justify-evenly gap-4">
         <Link
           href="/dashboard/invoices"
-          className="flex h-10 items-center rounded-lg bg-green px-6  py-2 text-xl text-tan transition-colors self-center hover:bg-gray-200"
+          className="flex h-10 items-center rounded-lg bg-green px-6 py-2 text-xl text-tan transition-colors hover:bg-gray-200"
         >
           Cancel
         </Link>
@@ -243,4 +232,4 @@ export default function AddProductForm({
       </div>
     </form>
   );
-}
+};
