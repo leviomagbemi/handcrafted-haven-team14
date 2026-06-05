@@ -6,8 +6,8 @@ import React from "react";
 import Header from "./ui/components/header.js";
 import Footer from "./ui/components/footer.js";
 import { quattrocento } from "@/app/ui/fonts";
-import { AuthProvider } from './lib/authContext';
-
+import { AuthProvider } from "./lib/authContext";
+import { CartProvider } from "./lib/cartContext";
 
 export default function RootLayout({
   children,
@@ -15,23 +15,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthProvider>
-      <html lang="en">
-        <Head>
-          <title>Handcrafted Haven</title>
-          <meta
-            title="Handcrafted Haven"
-            content="Welcome to the Handcrafted Haven online store"
-          />
-        </Head>
-        <body className={`${quattrocento.className}`}>
-          <div>
+    <html lang="en">
+      <Head>
+        <title>Handcrafted Haven</title>
+        <meta
+          title="Handcrafted Haven"
+          content="Welcome to the Handcrafted Haven online store"
+        />
+      </Head>
+
+      <body className={quattrocento.className}>
+        <AuthProvider>
+          <CartProvider>
             <Header />
-            <main>{children}</main>
+
+            <main>
+              {children}
+            </main>
+
             <Footer />
-          </div>
-        </body>
-      </html>
-    </AuthProvider>
+          </CartProvider>
+        </AuthProvider>
+      </body>
+    </html>
   );
 }
