@@ -34,22 +34,6 @@ export async function getAllProductImages() {
   noStore();
 
   try {
-    // =========================
-    // TEST QUERY
-    // Verify item exists manually
-    // =========================
-    const test = await sql`
-      SELECT
-        id,
-        title
-      FROM items
-      WHERE id = '65836928-49b3-499a-a1d3-4437f2397efd';
-    `;
-
-    console.log("=== TEST QUERY ===");
-    console.log("Test query:", test.rows);
-    console.log("==================");
-
     const result = await sql`
       SELECT
         id,
@@ -64,40 +48,6 @@ export async function getAllProductImages() {
     throw new Error("Failed to fetch product images.");
   }
 }
-
-/*
-WHY "Product not found" HAPPENS
-
-BEFORE:
-getProductDetail() returned:
-data.rows
-
-Which is an ARRAY:
-
-[
-  {
-    id: "...",
-    title: "Dream Catcher"
-  }
-]
-
-But the component expects ONE object:
-
-product.title
-
-NOT:
-
-product[0].title
-
-AFTER:
-Return ONLY the first row:
-return data.rows[0];
-
-Now:
-product.title
-
-works correctly.
-*/
 
 export async function getProductDetail(id: string) {
   noStore();
@@ -120,16 +70,6 @@ export async function getProductDetail(id: string) {
       WHERE items.id = ${id};
     `;
 
-    // =========================
-    // DEBUG LOGGING
-    // =========================
-    console.log("=== PRODUCT DEBUG ===");
-    console.log("Requested ID:", id);
-    console.log("Rows returned:", data.rows.length);
-    console.log("First row:", data.rows[0]);
-    console.log("====================");
-
-    // Return ONE object instead of array
     return data.rows[0] || null;
   } catch (error) {
     console.error("Database Error:", error);
@@ -337,29 +277,3 @@ export async function fetchArtistItems(id: string) {
     throw new Error("Failed to fetch artist items.");
   }
 }
-
-/*
-OTHER THINGS TO CHECK
-
-1. Verify .env.local
-Make sure POSTGRES_URL points
-to the correct database.
-
-2. Check seed errors
-Look for foreign key violations
-during npm run seed.
-
-3. Verify dynamic route
-File:
-app/dashboard/products/[id]/detail/page.tsx
-
-Code:
-
-export default function Page({
-  params,
-}: {
-  params: { id: string };
-}) {
-  return <ProductDetail id={params.id} />;
-}
-*/

@@ -3,8 +3,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "picsum.photos",
+        protocol: 'https',
+        hostname: '**', // Allow any external image hostname
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
       },
     ],
   },

@@ -165,8 +165,8 @@ export default function AddProductForm({
           <input
             id="image_url"
             name="image_url"
-            type="url"
-            placeholder="https://example.com/image.jpg"
+            type="text"
+            placeholder="/arts/textile-dream.png"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
             aria-describedby="image-error"
           />
