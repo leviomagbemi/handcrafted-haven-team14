@@ -1,3 +1,5 @@
+// app/dashboard/page.tsx  (or wherever this file is located)
+
 'use client';
 
 import React, { useContext } from "react";
@@ -6,6 +8,22 @@ import FilteredProducts from "../../ui/dashboard/filtered";
 import { AuthContext } from "../../lib/authContext";
 import Button from "../../ui/button";
 import Link from "next/link";
+
+// Helper to fetch user data with credentials (important for cookies/sessions)
+const fetchUser = async () => {
+  const res = await fetch('/api/user', {
+    method: 'GET',
+    credentials: 'include', // ← THIS IS THE MOST IMPORTANT LINE
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!res.ok) {
+    console.log("User fetch failed:", res.status);
+    return null;
+  }
+  return res.json();
+};
 
 export default function Page() {
 	const router = useRouter();
