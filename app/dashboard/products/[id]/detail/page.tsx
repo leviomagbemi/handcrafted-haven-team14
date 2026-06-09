@@ -2,6 +2,8 @@
 
 import ProductDetail from "@/app/ui/dashboard/productDetail";
 
-export default function Page({ params }: { params: { id: string } }) {
-  return <ProductDetail id={params.id} />;
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
+  return <ProductDetail id={id} />;
 }

@@ -51,8 +51,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/story" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100">
-                  Sustainability Mission
+                <Link href="/dashboard/artisans" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100">
+                  Meet Our Artisans
                 </Link>
               </li>
             </ul>

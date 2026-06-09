@@ -1,8 +1,7 @@
 
-require("dotenv").config({ path: ".env.local" });
+require("dotenv").config({ path: ".env" });
 
 const { db } = require("@vercel/postgres");
-const bcrypt = require("bcrypt");
 
 const {
   users,
@@ -59,7 +58,9 @@ async function seedArtisans(client) {
         email VARCHAR(255) NOT NULL UNIQUE,
         password TEXT NOT NULL,
         story TEXT NOT NULL,
-        image_url VARCHAR(255) NOT NULL
+        image_url VARCHAR(255) NOT NULL,
+        studio_name VARCHAR(255) NOT NULL,
+        craft_type VARCHAR(255) NOT NULL
       );
     `;
 
@@ -75,7 +76,9 @@ async function seedArtisans(client) {
           email,
           password,
           story,
-          image_url
+          image_url,
+          studio_name,
+          craft_type
         )
         VALUES (
           ${artisan.id},
@@ -83,7 +86,9 @@ async function seedArtisans(client) {
           ${artisan.email},
           ${hashedPassword},
           ${artisan.story},
-          ${artisan.image_url}
+          ${artisan.image_url},
+          ${artisan.studio_name},
+          ${artisan.craft_type}
         );
       `;
     }

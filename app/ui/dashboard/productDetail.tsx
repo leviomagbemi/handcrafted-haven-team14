@@ -20,6 +20,6 @@ export default async function ProductDetail({ id }: ProductDetailProps) {
   }
 
   return (
-    <ProductDetailClient product={product} reviews={reviews} />
+    <ProductDetailClient product={product} reviews={reviews as any} />
   );
 }

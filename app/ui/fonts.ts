@@ -1,10 +1,10 @@
-import { Libre_Caslon_Text, Inter } from 'next/font/google';
+import { Poppins, Inter } from 'next/font/google';
 
-export const libreCaslonText = Libre_Caslon_Text({
-  weight: ['400', '700'],
+export const poppins = Poppins({
+  weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
   style: ['normal', 'italic'],
-  variable: '--font-libre-caslon-text',
+  variable: '--font-poppins',
 });
 
 export const inter = Inter({

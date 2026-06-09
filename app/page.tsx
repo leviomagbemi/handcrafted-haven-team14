@@ -75,7 +75,7 @@ export default function LandingPage() {
             </p>
           </div>
           <Link 
-            href="/dashboard/story" 
+            href="/dashboard/artisans" 
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-secondary hover:text-secondary/80 transition-colors font-sans"
           >
             View all artisans

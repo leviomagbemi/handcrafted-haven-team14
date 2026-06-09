@@ -1,57 +1,122 @@
 'use client';
 
-import React, { useState } from "react";
-import LoginForm from "@/app/ui/login-form";
-import RegistrationForm from "@/app/ui/registration-form";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import LoginForm from '@/app/ui/login-form';
+import RegistrationForm from '@/app/ui/registration-form';
+
+type ActiveTab = 'login' | 'register';
 
 export default function LoginPage() {
-  const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
+  const [activeTab, setActiveTab] = useState<ActiveTab>('login');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleTabChange = (tab: ActiveTab) => {
+    setActiveTab(tab);
+    setSuccessMessage('');
+  };
 
   return (
-    <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 py-12 bg-tan">
-      <div className="w-full max-w-md">
-        {/* Tab Switcher */}
-        <div className="flex rounded-xl overflow-hidden border border-brown/30 mb-8 shadow-sm">
-          <button
-            onClick={() => setActiveTab('login')}
-            className={`flex-1 py-4 text-xl font-semibold transition-colors ${
-              activeTab === 'login'
-                ? 'bg-brown text-tan'
-                : 'bg-white text-brown hover:bg-tan'
-            }`}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => setActiveTab('register')}
-            className={`flex-1 py-4 text-xl font-semibold transition-colors ${
-              activeTab === 'register'
-                ? 'bg-brown text-tan'
-                : 'bg-white text-brown hover:bg-tan'
-            }`}
-          >
-            Sign Up
-          </button>
+    <div className="relative min-h-[calc(100vh-180px)] flex items-center justify-center px-4 py-12 overflow-hidden">
+
+      {/* ── Background: blurred craft image + dark overlay ── */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/sarah_jenkins_hands.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1208]/85 via-[#1a1208]/75 to-[#2d3a2e]/80" />
+      </div>
+
+      {/* ── Card ── */}
+      <div className="relative w-full max-w-md">
+
+        {/* Logo mark */}
+        <div className="flex justify-center mb-6">
+          <div className="flex flex-col items-center gap-1 select-none">
+            <span className="font-serif text-white/90 text-2xl tracking-tight leading-none">⌓</span>
+            <span className="text-[10px] font-bold text-white/50 tracking-[0.2em] uppercase">HH</span>
+          </div>
         </div>
 
-        {/* Form */}
-        <div className="bg-white rounded-2xl shadow-md border border-brown/20 p-8">
-          {activeTab === 'login' ? (
-            <>
-              <h2 className="text-3xl font-bold text-brown mb-6 text-center">
-                Welcome Back
-              </h2>
-              <LoginForm onSwitchToRegister={() => setActiveTab('register')} />
-            </>
-          ) : (
-            <>
-              <h2 className="text-3xl font-bold text-brown mb-6 text-center">
-                Create Account
-              </h2>
-              <RegistrationForm onSwitchToLogin={() => setActiveTab('login')} />
-            </>
-          )}
+        {/* Heading */}
+        <div className="text-center mb-8">
+          <h1 className="font-serif text-3xl font-bold text-white leading-tight">
+            {activeTab === 'login' ? 'Welcome Back' : 'Join the Collective'}
+          </h1>
+          <p className="text-sm text-white/60 mt-2 font-sans">
+            {activeTab === 'login'
+              ? 'Step into the boutique.'
+              : 'Start your handcrafted journey.'}
+          </p>
         </div>
+
+        {/* Glass card */}
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+
+          {/* Tab switcher */}
+          <div className="flex border-b border-gray-100">
+            <button
+              id="tab-login"
+              onClick={() => handleTabChange('login')}
+              className={`flex-1 py-4 text-sm font-bold tracking-wide transition-colors ${
+                activeTab === 'login'
+                  ? 'text-primary border-b-2 border-primary bg-white'
+                  : 'text-gray-400 hover:text-gray-600 bg-gray-50/60'
+              }`}
+            >
+              Sign In
+            </button>
+            <button
+              id="tab-register"
+              onClick={() => handleTabChange('register')}
+              className={`flex-1 py-4 text-sm font-bold tracking-wide transition-colors ${
+                activeTab === 'register'
+                  ? 'text-primary border-b-2 border-primary bg-white'
+                  : 'text-gray-400 hover:text-gray-600 bg-gray-50/60'
+              }`}
+            >
+              Create Account
+            </button>
+          </div>
+
+          {/* Form body */}
+          <div className="p-8">
+            {successMessage && (
+              <div role="status" className="mb-5 flex items-start gap-3 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-lg px-4 py-3 text-sm font-medium">
+                <span className="shrink-0 mt-0.5">✓</span>
+                <span>{successMessage}</span>
+              </div>
+            )}
+            {activeTab === 'login' ? (
+              <LoginForm
+                onSwitchToRegister={() => {
+                  setActiveTab('register');
+                  setSuccessMessage('');
+                }}
+              />
+            ) : (
+              <RegistrationForm
+                onSwitchToLogin={(msg) => {
+                  if (msg) setSuccessMessage(msg);
+                  setActiveTab('login');
+                }}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Footer note */}
+        <p className="text-center text-[11px] text-white/40 mt-6 font-sans">
+          By continuing, you agree to our{' '}
+          <span className="underline cursor-pointer hover:text-white/70 transition-colors">Terms of Service</span>
+          {' '}and{' '}
+          <span className="underline cursor-pointer hover:text-white/70 transition-colors">Privacy Policy</span>.
+        </p>
       </div>
     </div>
   );

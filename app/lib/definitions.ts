@@ -10,6 +10,9 @@ export type Artisans = {
   name: string;
   email: string;
   image_url: string;
+  story: string;
+  studio_name: string;
+  craft_type: string;
 };
 
 export type Item = {
@@ -21,6 +24,9 @@ export type Item = {
   description: string;
   image_url: string;
   status: string;
+  artisan_name?: string;
+  avg_rating?: number;
+  review_count?: number;
 };
 
 export type ArtisanList = {
@@ -32,6 +38,9 @@ export type ArtisanGrid = {
   id: string;
   name: string;
   image_url: string;
+  story?: string;
+  studio_name?: string;
+  craft_type?: string;
 };
 
 export type Product = {

@@ -38,7 +38,7 @@ module.exports = {
         darkBrown: '#375544', // Premium Sage Green
       },
       fontFamily: {
-        serif: ['var(--font-libre-caslon-text)', 'serif'],
+        serif: ['var(--font-poppins)', 'sans-serif'],
         sans: ['var(--font-inter)', 'sans-serif'],
       },
       width: {

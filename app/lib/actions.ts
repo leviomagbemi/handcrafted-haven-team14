@@ -97,3 +97,37 @@ console.log(formData);
   revalidatePath("/dashboard/account");
   redirect("/dashboard/account");
 }
+
+export async function submitReview(data: {
+  userId: string;
+  itemId: string;
+  rate: number;
+  text: string;
+}) {
+  try {
+    if (!data.userId || !data.itemId || !data.rate || !data.text.trim()) {
+      return { error: "Missing required fields for review submission." };
+    }
+
+    if (data.rate < 1 || data.rate > 5) {
+      return { error: "Rating must be between 1 and 5 stars." };
+    }
+
+    await sql`
+      INSERT INTO reviews (user_id, item_id, text, date, rate)
+      VALUES (
+        ${data.userId},
+        ${data.itemId},
+        ${data.text.trim()},
+        NOW(),
+        ${data.rate}
+      );
+    `;
+
+    revalidatePath(`/dashboard/products/${data.itemId}/detail`);
+    return { success: true };
+  } catch (error) {
+    console.error("Database Error:", error);
+    return { error: "Database error: Failed to submit review." };
+  }
+}

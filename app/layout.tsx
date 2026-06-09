@@ -1,10 +1,16 @@
 import "@/app/ui/globals.css";
 import React from "react";
-import Header from "./ui/components/header.js";
-import Footer from "./ui/components/footer.js";
-import { quattrocento } from "@/app/ui/fonts";
+import Header from "./ui/header";
+import Footer from "./ui/footer";
+import { poppins, inter } from "@/app/ui/fonts";
 import { AuthProvider } from "./lib/authContext";
 import { CartProvider } from "./lib/cartContext";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Handcrafted Haven",
+  description: "Welcome to the Handcrafted Haven online store",
+};
 
 export default function RootLayout({
   children,
@@ -13,15 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <title>Handcrafted Haven</title>
-        <meta
-          title="Handcrafted Haven"
-          content="Welcome to the Handcrafted Haven online store"
-        />
-      </Head>
-
-      <body className={quattrocento.className}>
+      <body className={`${inter.variable} ${poppins.variable}`}>
         <AuthProvider>
           <CartProvider>
             <Header />
