@@ -1,25 +1,58 @@
 'use client';
 
-import React from 'react';
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Define the shape of the user object
-interface User {
+// ─── Types ───────────────────────────────────────────────────────────────────
+
+export type UserRole = 'buyer' | 'artisan';
+
+interface AuthUser {
   id: string;
   name: string;
   email: string;
-  image_url?: string; // Make image_url optional
+  role: UserRole;
+  image_url?: string;
 }
 
-// Define the shape of the context value
 interface AuthContextType {
   isLoggedIn: boolean;
-  user: User | null; // Include user object
-  login: (token: string) => void;
+  user: AuthUser | null;
+  login: (token: string, userData: AuthUser) => void;
   logout: () => void;
 }
 
-// Create a new context for authentication
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+/** Decode JWT payload without a library (base64url → JSON). */
+function decodeJwt(token: string): Partial<AuthUser> | null {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const json = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
+}
+
+function loadUserFromStorage(): AuthUser | null {
+  if (typeof window === 'undefined') return null;
+  const raw = localStorage.getItem('auth_user');
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as AuthUser;
+  } catch {
+    return null;
+  }
+}
+
+// ─── Context ─────────────────────────────────────────────────────────────────
+
 export const AuthContext = createContext<AuthContextType>({
   isLoggedIn: false,
   user: null,
@@ -27,55 +60,39 @@ export const AuthContext = createContext<AuthContextType>({
   logout: () => {},
 });
 
-// Create a provider component to wrap your application
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  // State to track whether the user is logged in
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    // Check if localStorage is available before accessing it
-    if (typeof window !== 'undefined') {
-      return !!localStorage.getItem("token");
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Rehydrate from localStorage on mount (client only)
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const storedUser = loadUserFromStorage();
+
+    if (token && storedUser) {
+      setUser(storedUser);
+      setIsLoggedIn(true);
     }
-    return false;
-  });
+  }, []);
 
-  // State to store user data
-  const [user, setUser] = useState<User | null>(null);
-
-  // Method to log the user in
-  const login = (token: string) => {
+  /**
+   * Call this after a successful login response.
+   * Persists the token + user data so state survives a hard refresh.
+   */
+  const login = (token: string, userData: AuthUser) => {
     localStorage.setItem('token', token);
+    localStorage.setItem('auth_user', JSON.stringify(userData));
+    setUser(userData);
     setIsLoggedIn(true);
-    console.log("Token stored:", token);
-    // Fetch user data after successful login
-    fetchUserData();
   };
 
-  // Method to log the user out
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('auth_user');
+    setUser(null);
     setIsLoggedIn(false);
-    setUser(null); // Clear user data on logout
   };
 
-  // Function to fetch user data
-  const fetchUserData = async () => {
-    try {
-      // Example: Fetch user data from an API using the token
-      const response = await fetch("/api/user", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData);
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
-  // Provide the authentication state, user data, and methods to child components
   return (
     <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
       {children}
@@ -83,5 +100,5 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Custom hook to access the authentication context
+// Custom hook
 export const useAuth = () => useContext(AuthContext);

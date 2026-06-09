@@ -1,14 +1,15 @@
 import "@/app/ui/globals.css";
 import React from "react";
-import Header from "@/app/ui/header";
-import Footer from "@/app/ui/footer";
-import { libreCaslonText, inter } from "@/app/ui/fonts";
-import { Providers } from "@/app/ui/providers";
+import Header from "./ui/header";
+import Footer from "./ui/footer";
+import { poppins, inter } from "@/app/ui/fonts";
+import { AuthProvider } from "./lib/authContext";
+import { CartProvider } from "./lib/cartContext";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Handcrafted Haven | Premium Artisanal Marketplace",
-  description: "Welcome to Handcrafted Haven, a curated marketplace for premium handcrafted goods. Bridging the gap between raw, tactile artistry and modern home aesthetics.",
+  title: "Handcrafted Haven",
+  description: "Welcome to the Handcrafted Haven online store",
 };
 
 export default function RootLayout({
@@ -18,14 +19,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${libreCaslonText.variable} ${inter.variable} font-sans bg-background text-on-background min-h-screen flex flex-col`}>
-        <Providers>
-          <div className="flex flex-col min-h-screen">
+      <body className={`${inter.variable} ${poppins.variable}`}>
+        <AuthProvider>
+          <CartProvider>
             <Header />
-            <main className="flex-grow">{children}</main>
+
+            <main>
+              {children}
+            </main>
+
             <Footer />
-          </div>
-        </Providers>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
