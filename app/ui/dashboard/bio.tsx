@@ -32,7 +32,7 @@ export default async function ArtistDetail({
         <p className="text-gray-500 mb-8">The maker you are looking for does not exist or has been removed.</p>
         <Link
           href="/dashboard/artisans"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/95 text-white font-semibold rounded-md transition-all active:scale-95 text-sm"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-[#3a5244] hover:bg-[#2b4235] text-white font-semibold rounded-md transition-all active:scale-95 text-sm"
         >
           <ArrowLeftIcon className="h-4 w-4" />
           Back to Directory
@@ -77,7 +77,7 @@ export default async function ArtistDetail({
             className="object-cover"
           />
           {/* Verified Badge */}
-          <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1 bg-white/95 backdrop-blur-sm text-primary text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+          <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1 bg-white/95 backdrop-blur-sm text-primary text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
             <CheckBadgeIcon className="h-3.5 w-3.5" />
             Verified Artisan
           </span>
@@ -87,7 +87,7 @@ export default async function ArtistDetail({
         <div className="flex flex-col justify-between items-start text-left flex-grow gap-6 lg:py-2">
           <div className="flex flex-col gap-4 w-full">
             {/* Craft category label pill */}
-            <span className="inline-block self-start text-[10px] font-bold tracking-widest text-secondary uppercase bg-secondary/10 px-3 py-1 rounded-full">
+            <span className="inline-block self-start text-xs font-bold tracking-widest text-secondary uppercase bg-secondary/10 px-3 py-1 rounded-full">
               {details.craft_type ? details.craft_type.toUpperCase() : "ARTISAN"}
             </span>
 
@@ -118,7 +118,7 @@ export default async function ArtistDetail({
           <div className="mt-4 w-full">
             <Link
               href={`/dashboard/categories?query=${encodeURIComponent(details.name)}`}
-              className="inline-flex items-center justify-center px-6 py-3 bg-primary hover:bg-primary/95 text-white text-xs font-semibold rounded-md shadow-sm transition-colors active:scale-95 uppercase tracking-wider"
+              className="inline-flex items-center justify-center px-6 py-3 bg-[#3a5244] hover:bg-[#2b4235] text-white text-xs font-semibold rounded-md shadow-sm transition-colors active:scale-95 uppercase tracking-wider"
             >
               Shop All Creations
             </Link>
@@ -160,7 +160,7 @@ export default async function ArtistDetail({
                     className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
                   />
                   {item.status && item.status !== "available" && (
-                    <span className="absolute top-3 right-3 bg-gray-950/85 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+                    <span className="absolute top-3 right-3 bg-gray-950/85 text-white text-xs font-bold uppercase tracking-wider px-2 py-1 rounded">
                       {item.status}
                     </span>
                   )}

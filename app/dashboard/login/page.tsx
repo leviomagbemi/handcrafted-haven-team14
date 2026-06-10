@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import LoginForm from '@/app/ui/login-form';
 import RegistrationForm from '@/app/ui/registration-form';
 
@@ -39,7 +40,7 @@ export default function LoginPage() {
         <div className="flex justify-center mb-6">
           <div className="flex flex-col items-center gap-1 select-none">
             <span className="font-serif text-white/90 text-2xl tracking-tight leading-none">⌓</span>
-            <span className="text-[10px] font-bold text-white/50 tracking-[0.2em] uppercase">HH</span>
+            {/* <span className="text-[10px] font-bold text-white/50 tracking-[0.2em] uppercase">HH</span> */}
           </div>
         </div>
 
@@ -61,22 +62,22 @@ export default function LoginPage() {
           {/* Tab switcher */}
           <div className="flex border-b border-gray-100">
             <button
-              id="tab-login"
-              onClick={() => handleTabChange('login')}
-              className={`flex-1 py-4 text-sm font-bold tracking-wide transition-colors ${
-                activeTab === 'login'
-                  ? 'text-primary border-b-2 border-primary bg-white'
-                  : 'text-gray-400 hover:text-gray-600 bg-gray-50/60'
-              }`}
-            >
-              Sign In
-            </button>
+  id="tab-login"
+  onClick={() => handleTabChange('login')}
+  className={`flex-1 py-4 text-sm font-bold tracking-wide transition-colors ${
+    activeTab === 'login'
+      ? 'text-gray-900 border-b-2 border-[#3a5244] bg-white'
+      : 'text-gray-700 hover:text-gray-900 bg-gray-50/60'
+  }`}
+>
+  Sign In
+</button>
             <button
               id="tab-register"
               onClick={() => handleTabChange('register')}
               className={`flex-1 py-4 text-sm font-bold tracking-wide transition-colors ${
                 activeTab === 'register'
-                  ? 'text-primary border-b-2 border-primary bg-white'
+                  ? 'text-gray-900 border-b-2 border-[#3a5244] bg-white'
                   : 'text-gray-400 hover:text-gray-600 bg-gray-50/60'
               }`}
             >
@@ -113,9 +114,9 @@ export default function LoginPage() {
         {/* Footer note */}
         <p className="text-center text-[11px] text-white/40 mt-6 font-sans">
           By continuing, you agree to our{' '}
-          <span className="underline cursor-pointer hover:text-white/70 transition-colors">Terms of Service</span>
+          <Link href="/terms-of-service" className="hover:text-white/70 transition-colors">Terms of Service</Link>
           {' '}and{' '}
-          <span className="underline cursor-pointer hover:text-white/70 transition-colors">Privacy Policy</span>.
+          <Link href="/privacy-policy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>.
         </p>
       </div>
     </div>

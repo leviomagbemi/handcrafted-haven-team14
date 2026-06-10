@@ -41,7 +41,7 @@ export default function ProductGrid({ items }: { items: Item[] }) {
     if (c === "accessories") {
       return "bg-[#fdf2f8] text-[#be185d]"; // Jewelry / Accessories (soft pink)
     }
-    return "bg-[#f5f5f4] text-[#78716c]"; // Woodwork / Decor / default (stone gray)
+    return "bg-[#f5f5f4] text-[#57534e]"; // Stone gray (darkened from #78716c for contrast)
   };
 
   // Helper to map DB category names to UI displayed names
@@ -93,65 +93,62 @@ export default function ProductGrid({ items }: { items: Item[] }) {
               )}
             </button>
 
-            {/* Product Image Area */}
-            <Link
-              href={`/dashboard/products/${item.id}/detail`}
-              className="relative aspect-square w-full bg-stone-100 overflow-hidden border-b border-gray-100"
-            >
-              <Image
-                src={item.image_url}
-                alt={item.title}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-              />
+            {/* Combined Link for Image and Title to fix Redundant Link error */}
+            <Link href={`/dashboard/products/${item.id}/detail`} className="flex flex-col flex-grow">
+              <div className="relative aspect-square w-full bg-stone-100 overflow-hidden border-b border-gray-100">
+                <Image
+                  src={item.image_url}
+                  alt="" // Decorative since name is in the text of the link
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                />
 
-              {/* Category Tag Overlay */}
-              <span
-                className={`absolute bottom-4 left-4 px-2.5 py-1 rounded text-[10px] font-bold tracking-wider ${catStyle}`}
-              >
-                {displayCat}
-              </span>
-            </Link>
-
-            {/* Product Information Details */}
-            <div className="p-5 flex flex-col justify-between flex-grow gap-4 text-left">
-              <div className="flex justify-between items-start gap-4">
-                <Link href={`/dashboard/products/${item.id}/detail`} className="flex-grow">
-                  <h3 className="font-serif text-lg font-bold text-gray-900 group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
-                    {item.title}
-                  </h3>
-                </Link>
-                <span className="font-sans text-lg font-bold text-gray-900 shrink-0">
-                  {formatPrice(item.price)}
+                {/* Category Tag Overlay */}
+                <span
+                  className={`absolute bottom-4 left-4 px-2.5 py-1 rounded text-xs font-bold tracking-wider ${catStyle}`}
+                >
+                  {displayCat}
                 </span>
               </div>
 
-              {/* Artisan Profile & Add to Cart Footer */}
-              <div className="flex justify-between items-center mt-2 border-t border-gray-100 pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-stone-100 flex items-center justify-center border border-gray-200 font-serif text-[10px] font-bold text-gray-700 shadow-sm shrink-0">
-                    {getInitials(item.artisan_name)}
-                  </div>
-                  <span className="font-sans text-xs font-semibold text-gray-600 line-clamp-1">
-                    {item.artisan_name || "Unknown Artisan"}
+              {/* Product Information Details */}
+              <div className="p-5 flex flex-col justify-between flex-grow gap-4 text-left">
+                <div className="flex justify-between items-start gap-4">
+                  <h3 className="font-serif text-lg font-bold text-gray-900 group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
+                    {item.title}
+                  </h3>
+                  <span className="font-sans text-lg font-bold text-gray-900 shrink-0">
+                    {formatPrice(item.price)}
                   </span>
                 </div>
-
-                <button
-                  onClick={() => addToCart({
-                    id: item.id,
-                    title: item.title,
-                    price: item.price,
-                    image_url: item.image_url,
-                    artisan_name: item.artisan_name
-                  })}
-                  className="h-9 w-9 rounded-lg border border-gray-200 hover:border-primary hover:bg-primary hover:text-white flex items-center justify-center text-gray-600 transition-all active:scale-95"
-                  aria-label="Add to cart"
-                >
-                  <PlusIcon className="h-5 w-5" />
-                </button>
               </div>
+            </Link>
+
+            {/* Artisan Profile & Add to Cart Footer (Outside main Link to allow internal button clicks) */}
+            <div className="px-5 pb-5 flex justify-between items-center mt-auto border-t border-gray-100 pt-4">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-full bg-stone-100 flex items-center justify-center border border-gray-200 font-serif text-xs font-bold text-gray-700 shadow-sm shrink-0">
+                  {getInitials(item.artisan_name)}
+                </div>
+                <span className="font-sans text-xs font-semibold text-gray-600 line-clamp-1">
+                  {item.artisan_name || "Unknown Artisan"}
+                </span>
+              </div>
+
+              <button
+                onClick={() => addToCart({
+                  id: item.id,
+                  title: item.title,
+                  price: item.price,
+                  image_url: item.image_url,
+                  artisan_name: item.artisan_name
+                })}
+                className="h-9 w-9 rounded-lg border border-gray-200 hover:border-[#3a5244] hover:bg-[#3a5244] hover:text-white flex items-center justify-center text-gray-600 transition-colors active:scale-95"
+                aria-label={`Add ${item.title} to cart`}
+              >
+                <PlusIcon className="h-5 w-5" />
+              </button>
             </div>
           </div>
         );

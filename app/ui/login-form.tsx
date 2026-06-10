@@ -155,7 +155,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
           </label>
           <button
             type="button"
-            className="text-xs font-semibold text-primary hover:text-primary/80 transition-colors"
+            className="text-xs font-semibold text-primary hover:text-primary/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
           >
             Forgot password?
           </button>
@@ -178,9 +178,9 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             type="button"
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
           >
-            {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+            {showPassword ? <EyeSlashIcon className="h-5 w-5" aria-hidden="true" /> : <EyeIcon className="h-5 w-5" aria-hidden="true" />}
           </button>
         </div>
         {errors.password && (
@@ -194,10 +194,12 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full py-3 bg-primary hover:bg-primary/90 active:scale-[0.98] text-white font-bold rounded-lg text-sm tracking-wide shadow-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-1"
+        aria-busy={isLoading}
+        aria-label={isLoading ? 'Signing in, please wait' : 'Sign in'}
+        className="w-full py-3 bg-[#3a5244] hover:bg-[#2b4235] active:scale-[0.98] text-white font-bold rounded-lg text-sm tracking-wide shadow-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         {isLoading ? (
-          <span className="flex items-center justify-center gap-2">
+          <span className="flex items-center justify-center gap-2" aria-live="polite">
             <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             Signing in…
           </span>

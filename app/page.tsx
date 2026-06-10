@@ -55,7 +55,7 @@ export default function LandingPage() {
           <div className="mt-4">
             <Link
               href="/dashboard/categories"
-              className="inline-flex items-center justify-center px-10 py-4 border border-transparent text-base font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md font-sans"
+              className="inline-flex items-center justify-center px-10 py-4 border border-transparent text-base font-semibold rounded-full text-white bg-[#3a5244] hover:bg-[#2f4236] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md font-sans focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Shop the Collection
             </Link>
@@ -76,10 +76,10 @@ export default function LandingPage() {
           </div>
           <Link 
             href="/dashboard/artisans" 
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-secondary hover:text-secondary/80 transition-colors font-sans"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-secondary hover:text-secondary/80 transition-colors font-sans focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
           >
             View all artisans
-            <ArrowRightIcon className="h-4 w-4" />
+            <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
@@ -168,17 +168,17 @@ export default function LandingPage() {
           </h2>
           
           {/* Filter Pills */}
-          <div className="flex flex-wrap justify-center gap-3 mt-6">
-            <button className="bg-[#efeeec] px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface transition-colors cursor-pointer">
+          <div className="flex flex-wrap justify-center gap-3 mt-6" role="group" aria-label="Filter products by category">
+            <button className="bg-[#efeeec] px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" aria-pressed="true">
               All
             </button>
-            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer">
+            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" aria-pressed="false">
               Ceramics
             </button>
-            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer">
+            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" aria-pressed="false">
               Textiles
             </button>
-            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer">
+            <button className="bg-transparent px-5 py-2 rounded-full font-sans text-xs font-semibold text-on-surface-variant border border-outline-variant/60 hover:border-primary transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" aria-pressed="false">
               Woodwork
             </button>
           </div>

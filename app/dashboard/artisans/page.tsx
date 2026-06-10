@@ -44,13 +44,13 @@ export default async function Page({
           <span className="inline-block bg-[#fdf2f8] text-[#be185d] font-sans text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">
             Makers Collective
           </span>
-          <h1 id="hero-title" className="font-serif text-4xl sm:text-5xl font-bold tracking-tight text-primary leading-[1.15]">
+          <h1 id="hero-title" className="font-serif text-4xl sm:text-5xl font-bold tracking-tight text-[#3a5244] leading-[1.15]">
             Meet Our <span className="font-serif italic font-normal text-gray-500">Artisans</span>
           </h1>
           <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
             A curated directory of master makers committed to heritage techniques and sustainable craft. From sun-drenched pottery studios to family-run textile mills, discover the hands behind your favorite pieces.
           </p>
-          <button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary/95 text-white font-semibold rounded-md transition-all active:scale-[0.98] shadow-sm text-sm">
+          <button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#3a5244] hover:bg-[#2b4235] text-white font-semibold rounded-md transition-all active:scale-[0.98] shadow-sm text-sm">
             Explore Stories
             <ArrowRightIcon className="h-4 w-4" />
           </button>
@@ -69,7 +69,7 @@ export default async function Page({
 
           {/* Floating Verified Card */}
           <div className="absolute bottom-6 left-6 right-6 lg:left-8 lg:bottom-8 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-gray-100 flex items-start gap-3 text-left max-w-sm">
-            <div className="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center border border-primary/20 shrink-0">
+            <div className="h-8 w-8 rounded-full bg-[#3a5244]/10 text-[#3a5244] flex items-center justify-center border border-[#3a5244]/20 shrink-0">
               <CheckBadgeIcon className="h-5 w-5" />
             </div>
             <div className="flex flex-col gap-1">
@@ -94,15 +94,15 @@ export default async function Page({
 
       {/* 3. DISCOVER MORE BUTTON */}
       <div className="flex justify-center -mt-4">
-        <button className="inline-flex items-center justify-center gap-2 border border-gray-300 hover:border-primary px-6 py-3 rounded-md text-xs font-bold text-gray-600 hover:text-primary transition-all active:scale-95 cursor-pointer bg-white">
+        <button className="inline-flex items-center justify-center gap-2 border border-gray-300 hover:border-[#3a5244] px-6 py-3 rounded-md text-xs font-bold text-gray-600 hover:text-[#3a5244] transition-all active:scale-95 cursor-pointer bg-white">
           <ArrowPathIcon className="h-4 w-4" />
           Discover More Artisans
         </button>
       </div>
 
       {/* 4. ARE YOU A MAKER? CTA BANNER */}
-      <section className="bg-primary text-white rounded-2xl py-16 px-8 text-center flex flex-col items-center gap-6" aria-labelledby="cta-title">
-        <h2 id="cta-title" className="font-serif text-3xl font-bold tracking-tight">
+      <section className="bg-[#3a5244] rounded-2xl py-16 px-8 text-center flex flex-col items-center gap-6 text-white" aria-labelledby="cta-title">
+        <h2 id="cta-title" className="font-serif text-3xl font-bold tracking-tight !text-white">
           Are you a maker?
         </h2>
         <p className="font-sans text-sm text-white/80 max-w-xl leading-relaxed">
@@ -111,7 +111,7 @@ export default async function Page({
         <div className="flex flex-wrap gap-4 mt-2 justify-center">
           <Link
             href="/dashboard/registration"
-            className="px-6 py-3 bg-secondary hover:bg-secondary/95 text-white text-xs font-bold rounded-md shadow-md transition-all active:scale-95 uppercase tracking-wide"
+            className="px-6 py-3 bg-[#a65b32] hover:bg-[#8e4c29] text-white text-xs font-bold rounded-md shadow-md transition-all active:scale-95 uppercase tracking-wide"
           >
             Apply to Join
           </Link>

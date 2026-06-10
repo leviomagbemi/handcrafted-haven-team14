@@ -48,7 +48,9 @@ export default function ArtisansFilters() {
       
       {/* Search Input */}
       <div className="relative w-full lg:max-w-md">
+        <label htmlFor="artisan-search" className="sr-only">Search Artisans</label>
         <input
+          id="artisan-search"
           type="text"
           placeholder="Search by artisan or studio name..."
           value={searchInput}
@@ -68,7 +70,7 @@ export default function ArtisansFilters() {
               onClick={() => handleCraftTypeClick(craft)}
               className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all active:scale-[0.97] cursor-pointer ${
                 isActive
-                  ? "bg-primary text-white shadow-sm"
+                  ? "bg-[#3a5244] text-white shadow-sm"
                   : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-800"
               }`}
             >

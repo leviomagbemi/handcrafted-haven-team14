@@ -84,9 +84,9 @@ export default function ShopFilters() {
     <aside className="w-full lg:w-64 flex flex-col gap-8 text-left">
       {/* Category Filter */}
       <div className="flex flex-col gap-4 border-b border-gray-200 pb-6">
-        <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-500">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-700">
           Category
-        </h3>
+        </h2>
         <div className="flex flex-col gap-3">
           {categoriesList.map((cat) => {
             const isChecked = activeCategories.includes(cat);
@@ -109,33 +109,37 @@ export default function ShopFilters() {
 
       {/* Price Range Filter */}
       <div className="flex flex-col gap-4 border-b border-gray-200 pb-6">
-        <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-500">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-700">
           Price Range
-        </h3>
+        </h2>
         <div className="flex items-center gap-2">
           <div className="relative flex-grow">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-sans text-sm">
+            <label htmlFor="min-price" className="sr-only">Minimum Price</label>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-sans text-sm">
               $
             </span>
             <input
+              id="min-price"
               type="number"
               placeholder="Min"
               value={minPriceInput}
               onChange={(e) => setMinPriceInput(e.target.value)}
-              className="w-full pl-7 pr-3 py-2 rounded-md border border-gray-200 font-sans text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              className="w-full pl-7 pr-3 py-2 rounded-md border border-gray-200 font-sans text-sm text-gray-900 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
             />
           </div>
           <span className="text-gray-400 font-sans text-sm">-</span>
           <div className="relative flex-grow">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-sans text-sm">
+            <label htmlFor="max-price" className="sr-only">Maximum Price</label>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-sans text-sm">
               $
             </span>
             <input
+              id="max-price"
               type="number"
               placeholder="Max"
               value={maxPriceInput}
               onChange={(e) => setMaxPriceInput(e.target.value)}
-              className="w-full pl-7 pr-3 py-2 rounded-md border border-gray-200 font-sans text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              className="w-full pl-7 pr-3 py-2 rounded-md border border-gray-200 font-sans text-sm text-gray-900 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
             />
           </div>
         </div>
@@ -143,9 +147,9 @@ export default function ShopFilters() {
 
       {/* Rating Filter */}
       <div className="flex flex-col gap-4">
-        <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-500">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-700">
           Rating
-        </h3>
+        </h2>
         <div className="flex flex-col gap-3">
           {/* 5 Stars Option */}
           <button

@@ -19,11 +19,12 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
+            aria-current={isActive ? "page" : undefined}
             className={clsx(
-              "font-sans text-sm font-semibold tracking-wide transition-colors",
+              "font-sans text-sm font-semibold tracking-wide transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded px-2 py-1",
               isActive 
-                ? "text-primary border-b-2 border-primary py-1" 
-                : "text-on-surface/80 hover:text-primary py-1"
+                ? "text-primary border-b-2 border-primary" 
+                : "text-on-surface/80 hover:text-primary"
             )}
           >
             {link.name}

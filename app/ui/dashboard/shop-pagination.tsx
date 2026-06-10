@@ -75,7 +75,7 @@ export default function ShopPagination({ totalPages }: { totalPages: number }) {
             onClick={() => handlePageChange(page)}
             className={`h-9 w-9 flex items-center justify-center rounded-lg border text-sm font-semibold transition-all cursor-pointer active:scale-95 ${
               isCurrent
-                ? "bg-primary border-primary text-white"
+                ? "bg-[#3a5244] border-[#3a5244] text-white"
                 : "border-gray-200 text-gray-600 hover:border-primary hover:text-primary"
             }`}
             aria-current={isCurrent ? "page" : undefined}

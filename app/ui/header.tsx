@@ -29,11 +29,11 @@ export default function Header() {
 					
 					{/* Brand Logo and Title */}
 					<div className="flex items-center gap-6">
-						<Link href="/" className="flex items-center gap-3 group">
+						<Link href="/" className="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded">
 							<div className="relative h-12 w-12 rounded-full overflow-hidden border border-outline-variant group-hover:border-primary transition-colors">
 								<Image
 									src={logo}
-									alt="Handcrafted Haven Logo"
+									alt="Handcrafted Haven Home"
 									fill
 									sizes="48px"
 									className="object-cover"
@@ -47,16 +47,16 @@ export default function Header() {
 					</div>
 
 					{/* Navigation Links */}
-					<nav className="hidden md:flex items-center gap-8">
+					<nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
 						<NavLinks />
 					</nav>
 
 					{/* Actions: Account, Cart, Logout */}
-					<div className="flex items-center gap-4">
+					<div className="flex items-center gap-4" role="region" aria-label="User account and shopping">
 						{isLoggedIn && user ? (
 							<div className="flex items-center gap-3">
-								<Link href="/dashboard/account" aria-label="Account" className="flex items-center gap-2 group">
-									<UserCircleIcon className="h-7 w-7 text-on-surface group-hover:text-primary transition-colors" />
+								<Link href="/dashboard/account" aria-label={`Account profile for ${user.name}`} className="flex items-center gap-2 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded">
+									<UserCircleIcon className="h-7 w-7 text-on-surface group-hover:text-primary transition-colors" aria-hidden="true" />
 									<span className="hidden sm:block text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">
 										{user.name.split(' ')[0]}
 									</span>
@@ -66,21 +66,22 @@ export default function Header() {
 								</Link>
 								<button 
 									onClick={handleLogout}
-									className="text-sm font-medium text-secondary hover:text-primary transition-colors"
+									className="text-sm font-medium text-secondary hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-secondary rounded px-3 py-2"
+									aria-label="Logout from your account"
 								>
 									Logout
 								</button>
 							</div>
 						) : (
-							<Link href="/dashboard/login" aria-label="Login">
-								<UserCircleIcon className="h-7 w-7 text-on-surface hover:text-primary transition-colors" />
+							<Link href="/dashboard/login" aria-label="Login to your account" className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded p-1">
+								<UserCircleIcon className="h-7 w-7 text-on-surface hover:text-primary transition-colors" aria-hidden="true" />
 							</Link>
 						)}
 
-						<Link href="/dashboard/cart" aria-label="Cart" className="relative p-1 flex items-center justify-center">
-							<ShoppingCartIcon className="h-7 w-7 text-on-surface hover:text-primary transition-colors" />
+						<Link href="/dashboard/cart" aria-label={`Shopping cart with ${totalItems} item${totalItems !== 1 ? 's' : ''}`} className="relative p-1 flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded">
+							<ShoppingCartIcon className="h-7 w-7 text-on-surface hover:text-primary transition-colors" aria-hidden="true" />
 							{totalItems > 0 && (
-								<span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-secondary text-[9px] font-bold text-white ring-1 ring-white">
+								<span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-[11px] font-bold text-white ring-1 ring-white" aria-label={`${totalItems} items in cart`}>
 									{totalItems}
 								</span>
 							)}
@@ -91,7 +92,7 @@ export default function Header() {
 
 				{/* Mobile Navigation */}
 				<div className="md:hidden flex justify-center py-2 border-t border-outline-variant/50">
-					<nav className="flex gap-6">
+					<nav className="flex gap-6" aria-label="Mobile navigation">
 						<NavLinks />
 					</nav>
 				</div>
