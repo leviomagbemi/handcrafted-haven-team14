@@ -36,6 +36,7 @@ module.exports = {
         beige: '#efeeec',     // Stitch light gray container
         brown: '#1b1c1b',     // Premium charcoal text
         darkBrown: '#375544', // Premium Sage Green
+        green: '#375544',     // Stitch Sage Green container
       },
       fontFamily: {
         serif: ['var(--font-poppins)', 'sans-serif'],
