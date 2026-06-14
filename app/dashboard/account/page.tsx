@@ -130,7 +130,7 @@ function BuyerDashboard({ name, reviewsCount }: { name: string; reviewsCount: nu
                     </button>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </section>
