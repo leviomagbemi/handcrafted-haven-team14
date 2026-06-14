@@ -25,19 +25,19 @@ import { revalidatePath } from "next/cache";
 const FormNewProductSchema = z.object({
   id: z.string(),
   artisan_id: z.string({
-    invalid_type_error: "Please select a artist.",
+    message: "Please select a artist.",
   }),
   title: z.string({
-    invalid_type_error: "Please type a title.",
+    message: "Please type a title.",
   }),
   price: z.coerce
     .number()
     .gt(0, { message: "Please enter an amount greater than $0." }),
-  category: z.string({ invalid_type_error: "Please type a category." }),
-  description: z.string({ invalid_type_error: "Please type a description." }),
-  image_url: z.string({ invalid_type_error: "Please enter a image url." }),
+  category: z.string({ message: "Please type a category." }),
+  description: z.string({ message: "Please type a description." }),
+  image_url: z.string({ message: "Please enter a image url." }),
   status: z.enum(["available", "unavailable"], {
-    invalid_type_error: "Please select a status.",
+    message: "Please select a status.",
   }),
 });
 
