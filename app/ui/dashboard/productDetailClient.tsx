@@ -257,7 +257,7 @@ export default function ProductDetailClient({
             </div>
             {product.artisan_id && (
               <Link
-                href={`/dashboard/artistBio/${product.artisan_id}`}
+                href={`/dashboard/artisans/${product.artisan_id}`}
                 className="text-xs font-bold text-[#a65b32] hover:text-[#8e4c29] transition-colors uppercase tracking-wider"
               >
                 View Shop

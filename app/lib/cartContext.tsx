@@ -90,6 +90,42 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [isLoggedIn, user]);
 
+  // Fetch cart from database when user logs in
+  useEffect(() => {
+    if (isLoggedIn && user) {
+      const token = localStorage.getItem('token');
+      fetch('/api/cart', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => {
+        if (res.ok) return res.json();
+        throw new Error('Failed to load database cart');
+      })
+      .then(data => {
+        if (Array.isArray(data)) {
+          setCart(data);
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching database cart:', err);
+      });
+    } else {
+      // Revert to localStorage cart if logged out
+      const savedCart = localStorage.getItem('handcrafted-cart');
+      if (savedCart) {
+        try {
+          setCart(JSON.parse(savedCart));
+        } catch (e) {
+          setCart([]);
+        }
+      } else {
+        setCart([]);
+      }
+    }
+  }, [isLoggedIn, user]);
+
   // Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('handcrafted-cart', JSON.stringify(cart));
@@ -100,7 +136,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('handcrafted-wishlist', JSON.stringify(wishlist));
   }, [wishlist]);
 
-  const addToCart = (item: Omit<CartItem, 'quantity'>) => {
+  const addToCart = async (item: Omit<CartItem, 'quantity'>) => {
+    // 1. Instantly update local state for UI responsiveness
     setCart((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
@@ -110,20 +147,91 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { ...item, quantity: 1 }];
     });
+
+    // 2. Sync with database if logged in
+    if (isLoggedIn && user) {
+      const token = localStorage.getItem('token');
+      try {
+        await fetch('/api/cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({ itemId: item.id, quantity: 1 }),
+        });
+      } catch (err) {
+        console.error('Error syncing add-to-cart with database:', err);
+      }
+    }
   };
 
-  const removeFromCart = (id: string) => {
+  const removeFromCart = async (id: string) => {
+    // 1. Instantly update local state
     setCart((prev) => prev.filter((item) => item.id !== id));
+
+    // 2. Sync with database if logged in
+    if (isLoggedIn && user) {
+      const token = localStorage.getItem('token');
+      try {
+        await fetch(`/api/cart?itemId=${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+      } catch (err) {
+        console.error('Error syncing remove-from-cart with database:', err);
+      }
+    }
   };
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = async (id: string, quantity: number) => {
     if (quantity < 1) return;
+    
+    // 1. Instantly update local state
     setCart((prev) =>
       prev.map((item) => (item.id === id ? { ...item, quantity } : item))
     );
+
+    // 2. Sync with database if logged in
+    if (isLoggedIn && user) {
+      const token = localStorage.getItem('token');
+      try {
+        await fetch('/api/cart', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({ itemId: id, quantity }),
+        });
+      } catch (err) {
+        console.error('Error syncing update-quantity with database:', err);
+      }
+    }
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = async () => {
+    // 1. Instantly update local state
+    setCart([]);
+
+    // 2. Sync with database if logged in
+    if (isLoggedIn && user) {
+      const token = localStorage.getItem('token');
+      try {
+        await fetch('/api/cart', {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+      } catch (err) {
+        console.error('Error syncing clear-cart with database:', err);
+      }
+    }
+  };
+
 
   const getTotalPrice = () =>
     cart.reduce((sum, item) => sum + item.price * item.quantity, 0);

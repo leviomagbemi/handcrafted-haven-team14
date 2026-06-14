@@ -43,7 +43,7 @@ export default function ArtistGrid({ artisans }: { artisans: ArtisanGrid[] }) {
             <Link href={`/dashboard/artisans/${artist.id}`} className="flex flex-col flex-grow group !no-underline">
               <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden border-b border-gray-100">
                 <Image
-                  src={artist.image_url}
+                  src={artist.image_url || '/images/default-artisan.jpg'}
                   alt="" // Decorative because name is text in the link
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"

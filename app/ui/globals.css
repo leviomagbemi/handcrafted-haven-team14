@@ -24,3 +24,9 @@
     color: #1b1c1b;
   }
 }
+
+/* Custom focus outline override for price range inputs */
+#min-price:focus-visible,
+#max-price:focus-visible {
+  outline: none !important;
+}

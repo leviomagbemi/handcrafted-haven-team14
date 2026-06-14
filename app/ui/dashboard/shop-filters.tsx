@@ -21,20 +21,15 @@ export default function ShopFilters() {
   // Rating
   const activeRating = searchParams.get("rating") || "";
 
-  // Update categories query param
+  // Update categories query param (as single selection radio)
   const handleCategoryChange = (category: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    let newCats = [...activeCategories];
-    if (newCats.includes(category)) {
-      newCats = newCats.filter((c) => c !== category);
-    } else {
-      newCats.push(category);
-    }
+    const isCurrent = activeCategories.includes(category);
 
-    if (newCats.length > 0) {
-      params.set("categories", newCats.join(","));
-    } else {
+    if (isCurrent) {
       params.delete("categories");
+    } else {
+      params.set("categories", category);
     }
     params.set("page", "1"); // Reset pagination on filter change
     router.push(`${pathname}?${params.toString()}`);
@@ -83,22 +78,47 @@ export default function ShopFilters() {
   return (
     <aside className="w-full lg:w-64 flex flex-col gap-8 text-left">
       {/* Category Filter */}
-      <div className="flex flex-col gap-4 border-b border-gray-200 pb-6">
-        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-700">
+      <div className="flex flex-col gap-5 border-b border-slate-100 pb-8">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-slate-500">
           Category
         </h2>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3.5">
           {categoriesList.map((cat) => {
             const isChecked = activeCategories.includes(cat);
             return (
-              <label key={cat} className="flex items-center gap-3 cursor-pointer group">
+              <label key={cat} className="!flex items-center gap-3.5 !mb-0 !font-normal cursor-pointer group">
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="category"
+                  value={cat}
                   checked={isChecked}
-                  onChange={() => handleCategoryChange(cat)}
-                  className="h-4.5 w-4.5 rounded border-gray-300 text-secondary focus:ring-secondary cursor-pointer"
+                  onClick={(e) => {
+                    // Toggle off if clicking the already selected category
+                    if (isChecked) {
+                      e.preventDefault();
+                      handleCategoryChange(cat);
+                    }
+                  }}
+                  onChange={() => {
+                    if (!isChecked) {
+                      handleCategoryChange(cat);
+                    }
+                  }}
+                  className="peer sr-only"
                 />
-                <span className="font-sans text-sm text-gray-700 group-hover:text-primary transition-colors">
+                <div
+                  className={`h-[18px] w-[18px] rounded-full flex items-center justify-center transition-all duration-150
+                    peer-focus-visible:ring-2 peer-focus-visible:ring-slate-950 peer-focus-visible:ring-offset-1
+                    ${isChecked 
+                      ? "border-2 border-slate-950 bg-white" 
+                      : "border border-slate-300 bg-white group-hover:border-slate-400"
+                    }`}
+                >
+                  {isChecked && (
+                    <div className="h-2 w-2 rounded-full bg-slate-950" />
+                  )}
+                </div>
+                <span className="font-sans text-sm text-slate-700 group-hover:text-slate-950 transition-colors">
                   {cat}
                 </span>
               </label>
@@ -108,78 +128,86 @@ export default function ShopFilters() {
       </div>
 
       {/* Price Range Filter */}
-      <div className="flex flex-col gap-4 border-b border-gray-200 pb-6">
-        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-700">
+      <div className="flex flex-col gap-5 border-b border-slate-100 pb-8">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-slate-500">
           Price Range
         </h2>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <div className="relative flex-grow">
             <label htmlFor="min-price" className="sr-only">Minimum Price</label>
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-sans text-sm">
-              $
-            </span>
             <input
               id="min-price"
               type="number"
-              placeholder="Min"
+              placeholder="$ Min"
               value={minPriceInput}
               onChange={(e) => setMinPriceInput(e.target.value)}
-              className="w-full pl-7 pr-3 py-2 rounded-md border border-gray-200 font-sans text-sm text-gray-900 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              className="w-full px-3.5 py-2 rounded-lg border border-slate-200 bg-white font-sans text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-0 transition-colors shadow-none"
             />
           </div>
-          <span className="text-gray-400 font-sans text-sm">-</span>
+          <span className="text-slate-400 font-sans text-sm">-</span>
           <div className="relative flex-grow">
             <label htmlFor="max-price" className="sr-only">Maximum Price</label>
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-sans text-sm">
-              $
-            </span>
             <input
               id="max-price"
               type="number"
-              placeholder="Max"
+              placeholder="$ Max"
               value={maxPriceInput}
               onChange={(e) => setMaxPriceInput(e.target.value)}
-              className="w-full pl-7 pr-3 py-2 rounded-md border border-gray-200 font-sans text-sm text-gray-900 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              className="w-full px-3.5 py-2 rounded-lg border border-slate-200 bg-white font-sans text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-0 transition-colors shadow-none"
             />
           </div>
         </div>
       </div>
 
       {/* Rating Filter */}
-      <div className="flex flex-col gap-4">
-        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-gray-700">
+      <div className="flex flex-col gap-5">
+        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-slate-500">
           Rating
         </h2>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3.5">
           {/* 5 Stars Option */}
           <button
             onClick={() => handleRatingChange("5")}
-            className="flex items-center gap-2 cursor-pointer text-left w-full group"
+            className="flex items-center gap-3 cursor-pointer text-left w-full group"
           >
-            <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <StarIcon key={i} className="h-4 w-4 text-amber-400" />
-              ))}
+            <div className="flex items-center justify-center relative">
+               <div className={`h-5 w-5 rounded-full border flex items-center justify-center transition-colors ${activeRating === "5" ? "border-primary" : "border-gray-300 group-hover:border-primary"}`}>
+                 <div className={`h-2.5 w-2.5 rounded-full bg-primary transition-opacity ${activeRating === "5" ? "opacity-100" : "opacity-0"}`} />
+               </div>
             </div>
-            <span className={`font-sans text-sm transition-colors ${activeRating === "5" ? "text-primary font-semibold" : "text-gray-600 group-hover:text-primary"}`}>
-              5 Stars Only
-            </span>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <StarIcon key={i} className="h-4 w-4 text-amber-400" />
+                ))}
+              </div>
+              <span className={`font-sans text-sm transition-colors ${activeRating === "5" ? "text-gray-900 font-medium" : "text-gray-600 group-hover:text-gray-900"}`}>
+                5 Stars Only
+              </span>
+            </div>
           </button>
 
           {/* 4 Stars & Up Option */}
           <button
             onClick={() => handleRatingChange("4")}
-            className="flex items-center gap-2 cursor-pointer text-left w-full group"
+            className="flex items-center gap-3 cursor-pointer text-left w-full group"
           >
-            <div className="flex items-center gap-0.5">
-              {[...Array(4)].map((_, i) => (
-                <StarIcon key={i} className="h-4 w-4 text-amber-400" />
-              ))}
-              <StarIconOutline className="h-4 w-4 text-gray-300" />
+             <div className="flex items-center justify-center relative">
+               <div className={`h-5 w-5 rounded-full border flex items-center justify-center transition-colors ${activeRating === "4" ? "border-primary" : "border-gray-300 group-hover:border-primary"}`}>
+                 <div className={`h-2.5 w-2.5 rounded-full bg-primary transition-opacity ${activeRating === "4" ? "opacity-100" : "opacity-0"}`} />
+               </div>
             </div>
-            <span className={`font-sans text-sm transition-colors ${activeRating === "4" ? "text-primary font-semibold" : "text-gray-600 group-hover:text-primary"}`}>
-              4 Stars & Up
-            </span>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0.5">
+                {[...Array(4)].map((_, i) => (
+                  <StarIcon key={i} className="h-4 w-4 text-amber-400" />
+                ))}
+                <StarIconOutline className="h-4 w-4 text-amber-400 opacity-50" />
+              </div>
+              <span className={`font-sans text-sm transition-colors ${activeRating === "4" ? "text-gray-900 font-medium" : "text-gray-600 group-hover:text-gray-900"}`}>
+                4 Stars & Up
+              </span>
+            </div>
           </button>
         </div>
       </div>

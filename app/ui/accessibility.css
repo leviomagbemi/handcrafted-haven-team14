@@ -145,9 +145,6 @@ button,
   min-height: 44px;
   min-width: 44px;
   
-  /* Clear focus indicator */
-  position: relative;
-  
   /* Cursor pointer for clarity */
   cursor: pointer;
 }
