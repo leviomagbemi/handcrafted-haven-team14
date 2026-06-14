@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
       studio_name,
       craft_type,
       story,
+      image_url,
     } = body;
 
     // --- Defensive Type Checks ---
@@ -129,6 +130,11 @@ export async function POST(request: NextRequest) {
     let trimmedStudioName = '';
     let trimmedStory = '';
     let cleanCraftType = 'Ceramics';
+    let cleanImageUrl = '';
+
+    if (image_url && typeof image_url === 'string') {
+      cleanImageUrl = image_url.trim();
+    }
 
     if (cleanRole === 'artisan') {
       if (typeof studio_name !== 'string' || !studio_name.trim()) {
@@ -172,6 +178,13 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // --- Cleanup any orphaned artisan users (users with artisan role but no artisan profile) ---
+    await sql`
+      DELETE FROM users 
+      WHERE role = 'artisan' 
+        AND id NOT IN (SELECT id FROM artisans);
+    `;
+
     // --- Check for existing users account ---
     const existingUser = await sql`
       SELECT id FROM users WHERE email = ${trimmedEmail};
@@ -187,42 +200,45 @@ export async function POST(request: NextRequest) {
     // --- Hash password ---
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // --- Insert into users table ---
-    const newUser = await sql`
-      INSERT INTO users (name, email, password, image_url, role)
-      VALUES (
-        ${trimmedName},
-        ${trimmedEmail},
-        ${hashedPassword},
-        '/users/default-avatar.png',
-        ${cleanRole}
-      )
-      RETURNING id;
-    `;
-
-    const userId = newUser.rows[0].id;
-
-    // --- If artisan: also insert into artisans table ---
-    if (cleanRole === 'artisan') {
-      // Check if an artisan profile with this email already exists (shouldn't, but safety check)
-      const existingArtisan = await sql`
-        SELECT id FROM artisans WHERE email = ${trimmedEmail};
+    // --- Insert using a transaction to ensure both inserts succeed or roll back ---
+    await sql`BEGIN`;
+    try {
+      // --- Insert into users table ---
+      const newUser = await sql`
+        INSERT INTO users (name, email, password, image_url, role)
+        VALUES (
+          ${trimmedName},
+          ${trimmedEmail},
+          ${hashedPassword},
+          ${cleanImageUrl || '/users/default-avatar.png'},
+          ${cleanRole}
+        )
+        RETURNING id;
       `;
 
-      if (existingArtisan.rows.length === 0) {
+      const userId = newUser.rows[0].id;
+
+      // --- If artisan: also insert into artisans table ---
+      if (cleanRole === 'artisan') {
         await sql`
-          INSERT INTO artisans (id, name, email, story, image_url, studio_name, craft_type)
+          INSERT INTO artisans (id, name, email, password, story, image_url, studio_name, craft_type)
           VALUES (
             ${userId},
             ${trimmedName},
             ${trimmedEmail},
+            ${hashedPassword},
             ${trimmedStory},
-            '/images/default-artisan.jpg',
+            ${cleanImageUrl || '/images/default-artisan.jpg'},
             ${trimmedStudioName},
             ${cleanCraftType}
           );
         `;
       }
+
+      await sql`COMMIT`;
+    } catch (transactionError) {
+      await sql`ROLLBACK`;
+      throw transactionError;
     }
 
     return NextResponse.json(

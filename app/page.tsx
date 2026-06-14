@@ -189,7 +189,7 @@ export default function LandingPage() {
           
           {/* Card 1: Speckled Sage Morning Mug */}
           <div className="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative">
-            <button className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
+            <button className="absolute top-4 right-4 z-10 h-8 w-8 min-h-0 min-w-0 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
               <HeartIcon className="h-5 w-5" />
             </button>
             <div className="relative aspect-square w-full bg-[#efeeec]/35 overflow-hidden border-b border-outline-variant/40">
@@ -219,7 +219,7 @@ export default function LandingPage() {
 
           {/* Card 2: Earth Tone Linen Throw */}
           <div className="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative">
-            <button className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
+            <button className="absolute top-4 right-4 z-10 h-8 w-8 min-h-0 min-w-0 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
               <HeartIcon className="h-5 w-5" />
             </button>
             <div className="relative aspect-square w-full bg-[#efeeec]/35 overflow-hidden border-b border-outline-variant/40">
@@ -249,7 +249,7 @@ export default function LandingPage() {
 
           {/* Card 3: Walnut Artisan Board */}
           <div className="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative">
-            <button className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
+            <button className="absolute top-4 right-4 z-10 h-8 w-8 min-h-0 min-w-0 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
               <HeartIcon className="h-5 w-5" />
             </button>
             <div className="relative aspect-square w-full bg-[#efeeec]/35 overflow-hidden border-b border-outline-variant/40">
@@ -279,7 +279,7 @@ export default function LandingPage() {
 
           {/* Card 4: Raw Stone Signet Ring */}
           <div className="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative">
-            <button className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
+            <button className="absolute top-4 right-4 z-10 h-8 w-8 min-h-0 min-w-0 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-on-surface/60 hover:text-secondary transition-all hover:scale-105 active:scale-95" aria-label="Favorite">
               <HeartIcon className="h-5 w-5" />
             </button>
             <div className="relative aspect-square w-full bg-[#efeeec]/35 overflow-hidden border-b border-outline-variant/40">

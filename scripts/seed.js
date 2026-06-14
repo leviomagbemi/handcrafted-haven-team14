@@ -21,7 +21,8 @@ async function seedUsers(client) {
         name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
-        image_url VARCHAR(255) NOT NULL
+        image_url VARCHAR(255) NOT NULL,
+        role VARCHAR(255) DEFAULT 'buyer'
       );
     `;
 
@@ -31,13 +32,14 @@ async function seedUsers(client) {
       const hashedPassword = await bcrypt.hash(user.password, 10);
 
       await client.sql`
-        INSERT INTO users (id, name, email, password, image_url)
+        INSERT INTO users (id, name, email, password, image_url, role)
         VALUES (
           ${user.id},
           ${user.name},
           ${user.email},
           ${hashedPassword},
-          ${user.image_url}
+          ${user.image_url},
+          'buyer'
         );
       `;
     }
@@ -69,6 +71,20 @@ async function seedArtisans(client) {
     for (const artisan of artisans) {
       const hashedPassword = await bcrypt.hash(artisan.password, 10);
 
+      // 1. Insert into users table
+      await client.sql`
+        INSERT INTO users (id, name, email, password, image_url, role)
+        VALUES (
+          ${artisan.id},
+          ${artisan.name},
+          ${artisan.email},
+          ${hashedPassword},
+          '/users/default-avatar.png',
+          'artisan'
+        );
+      `;
+
+      // 2. Insert into artisans table
       await client.sql`
         INSERT INTO artisans (
           id,

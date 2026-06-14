@@ -22,6 +22,7 @@ const defaultFormData = {
   studio_name: '',
   craft_type: 'Ceramics',
   story: '',
+  image_url: '',
 };
 
 function validateRegisterForm(
@@ -89,6 +90,48 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
 
   const [formData, setFormData] = useState(defaultFormData);
 
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      setUploadError('Only image files are allowed.');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setUploadError('Image must be under 5MB.');
+      return;
+    }
+
+    setIsUploading(true);
+    setUploadError('');
+
+    try {
+      const uploadData = new FormData();
+      uploadData.append('file', file);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setUploadError(data.error || 'Upload failed.');
+        return;
+      }
+
+      setFormData((prev) => ({ ...prev, image_url: data.image_url }));
+    } catch {
+      setUploadError('Something went wrong during upload.');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -135,6 +178,9 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
         payload.studio_name = formData.studio_name.trim();
         payload.craft_type = formData.craft_type.trim();
         payload.story = formData.story.trim();
+        if (formData.image_url) {
+          payload.image_url = formData.image_url;
+        }
       }
 
       const res = await fetch('/api/register', {
@@ -450,6 +496,61 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
               <span className={`font-semibold shrink-0 ml-auto ${formData.story.length > 950 ? 'text-amber-600' : 'text-gray-400'}`}>
                 {formData.story.length} / 1000 characters
               </span>
+            </div>
+          </div>
+
+          {/* Profile Image Upload */}
+          <div className="flex flex-col gap-1.5">
+            <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              Profile Photo <span className="text-gray-400 font-normal normal-case tracking-normal">(optional)</span>
+            </span>
+            <div className="flex items-center gap-4 bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div className="relative h-16 w-16 rounded-full overflow-hidden border border-gray-200 bg-white shrink-0">
+                {formData.image_url ? (
+                  <img
+                    src={formData.image_url}
+                    alt="Profile preview"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="h-full w-full flex items-center justify-center text-gray-300 bg-gray-100">
+                    <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                  id="profile-upload"
+                  disabled={isUploading}
+                />
+                <div className="flex items-center gap-2">
+                  <label
+                    htmlFor="profile-upload"
+                    className={`px-4 py-2 bg-white hover:bg-gray-100 border border-gray-200 rounded-lg text-xs font-semibold text-gray-700 cursor-pointer transition-all ${
+                      isUploading ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    {isUploading ? 'Uploading...' : formData.image_url ? 'Change Photo' : 'Upload Photo'}
+                  </label>
+                  {formData.image_url && (
+                    <button
+                      type="button"
+                      onClick={() => setFormData(prev => ({ ...prev, image_url: '' }))}
+                      className="px-4 py-2 text-xs font-semibold text-red-600 hover:text-red-700 border border-transparent rounded-lg transition-all"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+                {uploadError && <p className="text-[11px] text-red-600 font-semibold">{uploadError}</p>}
+                <p className="text-[11px] text-gray-400">JPG, PNG or WebP. Max size 5MB.</p>
+              </div>
             </div>
           </div>
         </div>

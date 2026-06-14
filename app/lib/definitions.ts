@@ -3,6 +3,8 @@ export type User = {
   name: string;
   email: string;
   password: string;
+  role?: 'buyer' | 'artisan';
+  image_url?: string;
 };
 
 export type Artisans = {

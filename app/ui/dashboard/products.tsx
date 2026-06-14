@@ -83,7 +83,7 @@ export default function ProductGrid({ items }: { items: Item[] }) {
                 image_url: item.image_url,
                 artisan_name: item.artisan_name
               })}
-              className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-gray-600 transition-all hover:scale-110 active:scale-90"
+              className="absolute top-4 right-4 z-10 h-8 w-8 min-h-0 min-w-0 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm text-gray-600 transition-all hover:scale-110 active:scale-90"
               aria-label="Favorite"
             >
               {isFav ? (

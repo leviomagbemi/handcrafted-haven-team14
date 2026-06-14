@@ -69,7 +69,7 @@ export default async function ArtistDetail({
         {/* Profile Image Column */}
         <div className="relative w-full lg:w-[380px] aspect-square lg:aspect-[4/5] rounded-xl overflow-hidden shadow-md shrink-0 bg-stone-100">
           <Image
-            src={details.image_url}
+            src={details.image_url || '/images/default-artisan.jpg'}
             alt={`${details.name} portrait`}
             fill
             priority
