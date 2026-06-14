@@ -7,7 +7,7 @@ import logo from "../../public/images/hh-logo.png";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#efeeec] border-t border-outline-variant/60 text-on-surface py-12 mt-auto font-sans">
+    <footer className="w-full bg-[#efeeec] border-t border-outline-variant/60 text-on-surface py-12 mt-auto font-sans" role="contentinfo" aria-label="Site footer">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid */}
@@ -25,7 +25,7 @@ export default function Footer() {
                   className="object-cover"
                 />
               </div>
-              <Link href="/" className="font-serif text-2xl font-bold tracking-tight text-primary italic hover:text-primary/80 transition-colors">
+              <Link href="/" className="font-serif text-2xl font-bold tracking-tight text-primary italic hover:text-primary/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded">
                 Handcrafted Haven
               </Link>
             </div>
@@ -40,47 +40,47 @@ export default function Footer() {
           </div>
 
           {/* Platform Column */}
-          <div className="flex flex-col text-left">
-            <h4 className="text-sm font-semibold tracking-wider text-on-surface mb-4 uppercase">
+          <nav className="flex flex-col text-left" aria-label="Platform navigation">
+            <h2 className="text-sm font-semibold tracking-wider text-on-surface mb-4 uppercase">
               Platform
-            </h4>
+            </h2>
             <ul className="flex flex-col gap-3 text-xs font-semibold text-on-surface/75">
               <li>
-                <Link href="/dashboard/login" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100">
+                <Link href="/dashboard/login" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-secondary rounded">
                   Seller Portal
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/artisans" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100">
+                <Link href="/dashboard/artisans" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-secondary rounded">
                   Meet Our Artisans
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Support Column */}
-          <div className="flex flex-col text-left">
-            <h4 className="text-sm font-semibold tracking-wider text-on-surface mb-4 uppercase">
+          <nav className="flex flex-col text-left" aria-label="Support navigation">
+            <h2 className="text-sm font-semibold tracking-wider text-on-surface mb-4 uppercase">
               Support
-            </h4>
+            </h2>
             <ul className="flex flex-col gap-3 text-xs font-semibold text-on-surface/75">
               <li>
-                <Link href="#" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100">
+                <Link href="#" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-secondary rounded">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100">
+                <Link href="#" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-secondary rounded">
                   Shipping & Returns
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100">
+                <Link href="#" className="hover:text-secondary transition-colors opacity-80 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-secondary rounded">
                   Privacy Policy
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
         </div>
 

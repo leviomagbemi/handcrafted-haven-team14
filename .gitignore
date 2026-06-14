@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+ACCESSIBILITY_QUICK_REFERENCE.md
+GIT_COMMIT_MESSAGE.md

@@ -20,13 +20,13 @@ export default function CartPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-6">
         <div className="text-6xl mb-6">🛒</div>
-        <h2 className="text-4xl font-bold text-brown mb-4">Your cart is empty</h2>
+        <h1 className="text-4xl font-bold text-brown mb-4">Your cart is empty</h1>
         <p className="text-xl text-gray-600 mb-8 max-w-md">
           Looks like you haven't added any handmade treasures yet.
         </p>
         <Link
           href="/dashboard/categories"
-          className="bg-primary hover:bg-[#2b4235] text-white px-8 py-3 rounded-lg text-xl font-medium transition-colors"
+          className="bg-[#3a5244] hover:bg-[#2b4235] text-white px-8 py-3 rounded-lg text-xl font-medium transition-colors"
         >
           Start Shopping
         </Link>
@@ -37,7 +37,7 @@ export default function CartPage() {
   return (
     <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-4xl font-bold text-brown mb-10">Shopping Cart</h1>
-
+      {/* The h1 above is the main heading for the page when the cart is not empty */}
       <div className="space-y-8">
         {cart.map((item) => (
           <div
@@ -114,7 +114,7 @@ export default function CartPage() {
           </button>
           <Link
             href="/dashboard/checkout"
-            className="flex-1 bg-primary hover:bg-[#2b4235] text-white py-4 rounded-lg text-xl font-semibold transition-colors text-center flex items-center justify-center"
+            className="flex-1 bg-[#3a5244] hover:bg-[#2b4235] text-white py-4 rounded-lg text-xl font-semibold transition-colors text-center flex items-center justify-center"
           >
             Proceed to Checkout
           </Link>

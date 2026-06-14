@@ -171,27 +171,35 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
     }`;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate aria-label="User registration form">
 
       {/* Role Toggle */}
-      <div className="flex flex-col gap-2">
-        <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+      <fieldset className="flex flex-col gap-2">
+        <legend className="text-xs font-bold text-gray-700 uppercase tracking-wider">
           I am joining as a…
-        </span>
+        </legend>
         <div className="grid grid-cols-2 gap-3">
           {/* Buyer */}
           <button
             type="button"
             id="role-buyer"
             onClick={() => setRole('buyer')}
-            className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all ${
+            onKeyDown={(e) => {
+              if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                setRole('buyer');
+              }
+            }}
+            aria-pressed={role === 'buyer'}
+            aria-label="Join as a buyer - shop and collect items"
+            className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1 ${
               role === 'buyer'
                 ? 'border-primary bg-primary/5 text-primary'
                 : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'
             }`}
           >
             <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${role === 'buyer' ? 'bg-primary/10' : 'bg-gray-100'}`}>
-              <UserIcon className="h-4 w-4" />
+              <UserIcon className="h-4 w-4" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm font-bold leading-tight">Buyer</p>
@@ -204,14 +212,22 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
             type="button"
             id="role-artisan"
             onClick={() => setRole('artisan')}
-            className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all ${
+            onKeyDown={(e) => {
+              if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                setRole('artisan');
+              }
+            }}
+            aria-pressed={role === 'artisan'}
+            aria-label="Join as an artisan - sell your craft"
+            className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-secondary focus-visible:outline-offset-1 ${
               role === 'artisan'
                 ? 'border-secondary bg-secondary/5 text-secondary'
                 : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'
             }`}
           >
             <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${role === 'artisan' ? 'bg-secondary/10' : 'bg-gray-100'}`}>
-              <PaintBrushIcon className="h-4 w-4" />
+              <PaintBrushIcon className="h-4 w-4" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm font-bold leading-tight">Artisan</p>
@@ -219,7 +235,7 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
             </div>
           </button>
         </div>
-      </div>
+      </fieldset>
 
       {/* Divider */}
       <div className="h-px bg-gray-100" />
@@ -443,11 +459,13 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full py-3 bg-primary hover:bg-primary/90 active:scale-[0.98] text-white font-bold rounded-lg text-sm tracking-wide shadow-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-1"
+        aria-busy={isLoading}
+        aria-label={isLoading ? 'Creating account, please wait' : role === 'artisan' ? 'Apply as an artisan' : 'Create account'}
+        className="w-full py-3 bg-[#3a5244] hover:bg-[#2b4235] active:scale-[0.98] text-white font-bold rounded-lg text-sm tracking-wide shadow-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         {isLoading ? (
-          <span className="flex items-center justify-center gap-2">
-            <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          <span className="flex items-center justify-center gap-2" aria-live="polite">
+            <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
             Creating account…
           </span>
         ) : role === 'artisan' ? (
@@ -463,7 +481,7 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
           <button
             type="button"
             onClick={() => onSwitchToLogin()}
-            className="font-semibold text-primary hover:text-primary/80 transition-colors"
+            className="font-semibold text-primary hover:text-primary/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
           >
             Sign in
           </button>

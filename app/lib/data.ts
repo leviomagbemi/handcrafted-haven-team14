@@ -4,6 +4,7 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 
 import { User, Item, Artisans } from "./definitions";
+import { dbConfig, getMockShopItems, getMockArtisans, countMockShopItems } from "./db-config";
 
 // ======================
 // USERS
@@ -385,6 +386,13 @@ export async function fetchFilteredShopItems({
 }) {
   noStore();
 
+  // Use mock data in development when database is not configured
+  if (dbConfig.useMockData) {
+    console.log('📦 Using mock shop items (database not configured)');
+    const mockItems = getMockShopItems({ query, categories, minPrice, maxPrice, limit, offset });
+    return mockItems as Item[];
+  }
+
   try {
     const dbCategories: string[] = [];
     categories.forEach((cat) => {
@@ -464,6 +472,12 @@ export async function fetchShopItemsCount({
 }) {
   noStore();
 
+  // Use mock data in development when database is not configured
+  if (dbConfig.useMockData) {
+    console.log('📊 Using mock shop items count (database not configured)');
+    return countMockShopItems({ query, categories, minPrice, maxPrice, minRating });
+  }
+
   try {
     const dbCategories: string[] = [];
     categories.forEach((cat) => {
@@ -518,6 +532,13 @@ export async function fetchFilteredArtisans({
   craftType?: string;
 }) {
   noStore();
+
+  // Use mock data in development when database is not configured
+  if (dbConfig.useMockData) {
+    console.log('👩‍🎨 Using mock artisans (database not configured)');
+    const mockArtisans = getMockArtisans({ query, craftType });
+    return mockArtisans as Artisans[];
+  }
 
   try {
     const isAllCrafts = craftType === 'All Crafts' || !craftType;

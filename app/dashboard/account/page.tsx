@@ -40,15 +40,15 @@ function BuyerDashboard({ name, reviewsCount }: { name: string; reviewsCount: nu
           { label: 'Items Saved', value: wishlist.length.toString(), icon: StarIcon, color: 'text-secondary bg-secondary/8' },
           { label: 'Reviews Written', value: reviewsCount.toString(), icon: StarIcon, color: 'text-emerald-600 bg-emerald-50' },
         ].map(({ label, value, icon: Icon, color }) => (
-          <div key={label} className="bg-white border border-gray-100 rounded-xl p-6 flex items-center gap-5 shadow-sm">
+          <article key={label} className="bg-white border border-gray-100 rounded-xl p-6 flex items-center gap-5 shadow-sm">
             <div className={`h-11 w-11 rounded-full flex items-center justify-center shrink-0 ${color}`}>
-              <Icon className="h-5 w-5" />
+              <Icon className="h-5 w-5" aria-hidden="true" />
             </div>
             <div>
               <p className="text-2xl font-bold text-gray-900">{value}</p>
               <p className="text-xs text-gray-500 font-semibold">{label}</p>
             </div>
-          </div>
+          </article>
         ))}
       </div>
 
@@ -56,10 +56,11 @@ function BuyerDashboard({ name, reviewsCount }: { name: string; reviewsCount: nu
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Link
           href="/dashboard/categories"
-          className="group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all"
+          className="group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+          aria-label="Browse the shop to discover handcrafted items"
         >
           <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-            <ShoppingBagIcon className="h-5 w-5 text-primary" />
+            <ShoppingBagIcon className="h-5 w-5 text-primary" aria-hidden="true" />
           </div>
           <div>
             <p className="font-semibold text-gray-900 text-sm group-hover:text-primary transition-colors">Browse the Shop</p>
@@ -69,10 +70,11 @@ function BuyerDashboard({ name, reviewsCount }: { name: string; reviewsCount: nu
 
         <Link
           href="/dashboard/artisans"
-          className="group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all"
+          className="group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all focus-visible:outline-2 focus-visible:outline-secondary focus-visible:outline-offset-2"
+          aria-label="Meet artisans and explore their profiles"
         >
           <div className="h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-            <UserCircleIcon className="h-5 w-5 text-secondary" />
+            <UserCircleIcon className="h-5 w-5 text-secondary" aria-hidden="true" />
           </div>
           <div>
             <p className="font-semibold text-gray-900 text-sm group-hover:text-primary transition-colors">Meet Artisans</p>
@@ -83,7 +85,7 @@ function BuyerDashboard({ name, reviewsCount }: { name: string; reviewsCount: nu
 
       {/* Saved Items Grid */}
       {wishlist.length > 0 && (
-        <section className="flex flex-col gap-6 text-left">
+        <section className="flex flex-col gap-6 text-left" aria-label="Saved items">
           <div className="flex flex-col gap-0.5">
             <h2 className="font-serif text-2xl font-bold text-primary">Saved Items</h2>
             <p className="text-xs text-gray-500 font-medium">Your curated collection of handmade pieces.</p>
@@ -91,9 +93,9 @@ function BuyerDashboard({ name, reviewsCount }: { name: string; reviewsCount: nu
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {wishlist.map((item) => (
-              <div
+              <article
                 key={item.id}
-                className="bg-white border border-outline-variant/60 rounded-xl p-4 flex gap-4 shadow-sm relative group"
+                className="bg-white border border-outline-variant/60 rounded-xl p-4 flex gap-4 shadow-sm relative group focus-within:ring-2 focus-within:ring-primary/50"
               >
                 <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden border border-outline-variant/40 bg-gray-50">
                   <Image
@@ -114,13 +116,15 @@ function BuyerDashboard({ name, reviewsCount }: { name: string; reviewsCount: nu
                   <div className="flex items-center gap-3 mt-3">
                     <button
                       onClick={() => addToCart(item)}
-                      className="px-4 py-1.5 bg-primary hover:bg-primary/90 text-white text-[11px] font-bold rounded-lg transition-all active:scale-95"
+                      aria-label={`Add ${item.title} to cart`}
+                      className="px-4 py-1.5 bg-primary hover:bg-primary/90 text-white text-[11px] font-bold rounded-lg transition-all active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
                     >
                       Add to Cart
                     </button>
                     <button
                       onClick={() => toggleWishlist(item)}
-                      className="text-[11px] text-red-600 hover:text-red-700 font-bold transition-colors"
+                      aria-label={`Remove ${item.title} from wishlist`}
+                      className="text-[11px] text-red-600 hover:text-red-700 font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-red-600"
                     >
                       Remove
                     </button>
@@ -133,13 +137,13 @@ function BuyerDashboard({ name, reviewsCount }: { name: string; reviewsCount: nu
       )}
 
       {/* Orders placeholder */}
-      <section className="bg-white border border-gray-100 rounded-xl p-8 text-center shadow-sm">
-        <ShoppingBagIcon className="h-10 w-10 text-gray-300 mx-auto mb-3" />
+      <section className="bg-white border border-gray-100 rounded-xl p-8 text-center shadow-sm" aria-label="Orders summary">
+        <ShoppingBagIcon className="h-10 w-10 text-gray-300 mx-auto mb-3" aria-hidden="true" />
         <h2 className="font-serif text-lg font-bold text-gray-700 mb-1">No orders yet</h2>
         <p className="text-sm text-gray-500 mb-5">Your completed purchases will appear here.</p>
         <Link
           href="/dashboard/categories"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary/90 text-white text-xs font-bold rounded-lg transition-all active:scale-95"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary/90 text-white text-xs font-bold rounded-lg transition-all active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           Start Shopping
         </Link>

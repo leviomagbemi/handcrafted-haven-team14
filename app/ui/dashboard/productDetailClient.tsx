@@ -210,7 +210,7 @@ export default function ProductDetailClient({
           {/* Category Pill & Rating */}
           <div className="flex flex-col gap-2.5">
             <div className="flex items-center gap-3">
-              <span className="inline-block bg-[#efeeec] text-[#5c5b57] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              <span className="inline-block bg-[#efeeec] text-[#5c5b57] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                 {product.category || 'Craft'}
               </span>
               <div className="flex items-center gap-1">
@@ -248,7 +248,7 @@ export default function ProductDetailClient({
               <div className="text-left">
                 <div className="flex items-center gap-1.5">
                   <h4 className="font-serif font-bold text-primary text-sm leading-none">{artisanStudio}</h4>
-                  <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#e2f0d9] text-[#385723] text-[9px] font-extrabold shadow-sm shrink-0">
+                  <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#e2f0d9] text-[#385723] text-[11px] font-extrabold shadow-sm shrink-0">
                     HH
                   </span>
                 </div>
@@ -369,7 +369,7 @@ export default function ProductDetailClient({
           {product.id && (
             <Link
               href={`/dashboard/products/${product.id}/detail/review`}
-              className="inline-flex items-center justify-center px-5 py-2.5 bg-primary hover:bg-primary/90 text-white text-xs font-bold rounded-lg transition-all active:scale-95"
+              className="inline-flex items-center justify-center px-5 py-2.5 bg-[#3a5244] hover:bg-[#2b4235] text-white text-xs font-bold rounded-lg transition-all active:scale-95"
             >
               Write a Review
             </Link>

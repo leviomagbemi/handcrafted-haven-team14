@@ -228,7 +228,7 @@ export default function AddProductForm({
         >
           Cancel
         </Link>
-        <Button type="submit">Create Product</Button>
+        <Button type="submit" className="bg-[#3a5244] hover:bg-[#2b4235] text-white">Create Product</Button>
       </div>
     </form>
   );

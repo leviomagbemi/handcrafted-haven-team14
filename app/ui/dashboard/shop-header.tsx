@@ -91,8 +91,9 @@ export default function ShopHeader({ itemsCount }: { itemsCount: number }) {
 
         {/* Sort By Dropdown */}
         <div className="flex items-center gap-3 self-start md:self-auto shrink-0 font-sans text-sm">
-          <span className="text-gray-500">Sort by:</span>
+          <label htmlFor="sort-select" className="text-gray-700">Sort by:</label>
           <select
+            id="sort-select"
             value={sort}
             onChange={(e) => handleSortChange(e.target.value)}
             className="rounded-md border border-gray-200 bg-white px-3 py-1.5 pr-8 font-semibold text-gray-700 outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer hover:border-gray-300 transition-colors"
