@@ -20,7 +20,7 @@ export default function LoginPage() {
   return (
     <div className="relative min-h-[calc(100vh-180px)] flex items-center justify-center px-4 py-12 overflow-hidden">
 
-      {/* ── Background: blurred craft image + dark overlay ── */}
+      {/* ── Background: blurred craft image + light overlay ── */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="/images/sarah_jenkins_hands.png"
@@ -30,7 +30,7 @@ export default function LoginPage() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1208]/85 via-[#1a1208]/75 to-[#2d3a2e]/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#faf9f7]/90 via-[#faf9f7]/80 to-[#efeeec]/85" />
       </div>
 
       {/* ── Card ── */}
@@ -39,17 +39,17 @@ export default function LoginPage() {
         {/* Logo mark */}
         <div className="flex justify-center mb-6">
           <div className="flex flex-col items-center gap-1 select-none">
-            <span className="font-serif text-white/90 text-2xl tracking-tight leading-none">⌓</span>
-            {/* <span className="text-[10px] font-bold text-white/50 tracking-[0.2em] uppercase">HH</span> */}
+            <span className="font-serif text-[#1c2e24] text-2xl tracking-tight leading-none">⌓</span>
+            {/* <span className="text-[10px] font-bold text-[#1c2e24]/50 tracking-[0.2em] uppercase">HH</span> */}
           </div>
         </div>
 
         {/* Heading */}
         <div className="text-center mb-8">
-          <h1 className="font-serif text-3xl font-bold text-white leading-tight">
+          <h1 className="font-serif text-3xl font-bold text-[#1c2e24] leading-tight">
             {activeTab === 'login' ? 'Welcome Back' : 'Join the Collective'}
           </h1>
-          <p className="text-sm text-white/80 mt-2 font-sans">
+          <p className="text-sm text-[#1c2e24]/80 mt-2 font-sans">
             {activeTab === 'login'
               ? 'Step into the boutique.'
               : 'Start your handcrafted journey.'}
@@ -112,11 +112,11 @@ export default function LoginPage() {
         </div>
 
         {/* Footer note */}
-        <p className="text-center text-[11px] text-white/70 mt-6 font-sans">
+        <p className="text-center text-[11px] text-[#1c2e24] mt-6 font-sans font-medium">
           By continuing, you agree to our{' '}
-          <Link href="/terms-of-service" className="hover:text-white underline transition-colors">Terms of Service</Link>
+          <Link href="/terms-of-service" className="hover:text-[#1c2e24] underline transition-colors font-bold">Terms of Service</Link>
           {' '}and{' '}
-          <Link href="/privacy-policy" className="hover:text-white underline transition-colors">Privacy Policy</Link>.
+          <Link href="/privacy-policy" className="hover:text-[#1c2e24] underline transition-colors font-bold">Privacy Policy</Link>.
         </p>
       </div>
     </div>
