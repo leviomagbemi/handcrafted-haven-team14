@@ -115,9 +115,11 @@ export default function ProductGrid({ items }: { items: Item[] }) {
               {/* Product Information Details */}
               <div className="p-5 flex flex-col justify-between flex-grow gap-4 text-left">
                 <div className="flex justify-between items-start gap-4">
-                  <h3 className="font-serif text-lg font-bold text-gray-900 group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
-                    {item.title}
-                  </h3>
+                  {item.title && item.title.trim() ? (
+                    <h3 className="font-serif text-lg font-bold text-gray-900 group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
+                      {item.title}
+                    </h3>
+                  ) : null}
                   <span className="font-sans text-lg font-bold text-gray-900 shrink-0">
                     {formatPrice(item.price)}
                   </span>

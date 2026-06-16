@@ -210,12 +210,12 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
 
       {/* Switch to register */}
       {onSwitchToRegister && (
-        <p className="text-center text-sm text-gray-500 mt-1">
+        <p className="text-center text-sm text-gray-600 mt-1">
           New to Handcrafted Haven?{' '}
           <button
             type="button"
             onClick={onSwitchToRegister}
-            className="font-semibold text-primary hover:text-primary/80 transition-colors"
+            className="font-semibold text-primary hover:text-primary/95 underline transition-colors"
           >
             Create Account
           </button>

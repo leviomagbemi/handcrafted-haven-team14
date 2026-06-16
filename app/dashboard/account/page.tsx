@@ -121,7 +121,9 @@ function BuyerDashboard({ profile, reviewsCount }: { profile: ProfileType; revie
                 </div>
                 <div className="flex-1 flex flex-col justify-between py-1 text-left">
                   <div>
-                    <h3 className="font-serif font-bold text-primary text-sm line-clamp-1">{item.title}</h3>
+                    {item.title && item.title.trim() ? (
+                      <h3 className="font-serif font-bold text-primary text-sm line-clamp-1">{item.title}</h3>
+                    ) : null}
                     {item.artisan_name && (
                       <p className="text-[10px] text-gray-400 mt-0.5">by {item.artisan_name}</p>
                     )}
@@ -633,9 +635,11 @@ function ArtisanDashboard({ profile, listingsCount, reviewsCount, onUpdateProfil
                 {/* Details */}
                 <div className="p-4 flex flex-col justify-between flex-grow gap-3 text-left">
                   <div className="flex justify-between items-start gap-4">
-                    <h3 className="font-serif text-sm font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-primary transition-colors">
-                      {listing.title}
-                    </h3>
+                    {listing.title && listing.title.trim() ? (
+                      <h3 className="font-serif text-sm font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-primary transition-colors">
+                        {listing.title}
+                      </h3>
+                    ) : null}
                     <span className="font-sans text-sm font-bold text-gray-900 shrink-0">
                       {formatCurrency(listing.price)}
                     </span>

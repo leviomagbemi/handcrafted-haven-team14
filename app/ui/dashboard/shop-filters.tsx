@@ -78,16 +78,22 @@ export default function ShopFilters() {
   return (
     <aside className="w-full lg:w-64 flex flex-col gap-8 text-left">
       {/* Category Filter */}
-      <div className="flex flex-col gap-5 border-b border-slate-100 pb-8">
-        <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-slate-500">
+      <fieldset className="flex flex-col gap-5 border-none p-0 m-0 border-b border-slate-100 pb-8 w-full">
+        <legend className="font-sans text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
           Category
-        </h2>
-        <div className="flex flex-col gap-3.5">
+        </legend>
+        <div className="flex flex-col gap-3.5 text-left">
           {categoriesList.map((cat) => {
             const isChecked = activeCategories.includes(cat);
+            const inputId = `category-${cat.toLowerCase().replace(/\s+/g, '-')}`;
             return (
-              <label key={cat} className="!flex items-center gap-3.5 !mb-0 !font-normal cursor-pointer group">
+              <label
+                key={cat}
+                htmlFor={inputId}
+                className="!flex items-center gap-3.5 !mb-0 !font-normal cursor-pointer group"
+              >
                 <input
+                  id={inputId}
                   type="radio"
                   name="category"
                   value={cat}
@@ -125,7 +131,7 @@ export default function ShopFilters() {
             );
           })}
         </div>
-      </div>
+      </fieldset>
 
       {/* Price Range Filter */}
       <div className="flex flex-col gap-5 border-b border-slate-100 pb-8">

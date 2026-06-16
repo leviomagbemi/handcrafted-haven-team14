@@ -241,7 +241,7 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
             className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1 ${
               role === 'buyer'
                 ? 'border-primary bg-primary/5 text-primary'
-                : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'
+                : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:text-gray-900'
             }`}
           >
             <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${role === 'buyer' ? 'bg-primary/10' : 'bg-gray-100'}`}>
@@ -249,7 +249,7 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
             </div>
             <div>
               <p className="text-sm font-bold leading-tight">Buyer</p>
-              <p className="text-[11px] text-gray-400 leading-tight mt-0.5">Shop & collect</p>
+              <p className="text-[11px] text-gray-500 leading-tight mt-0.5">Shop & collect</p>
             </div>
           </button>
 
@@ -269,7 +269,7 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
             className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-secondary focus-visible:outline-offset-1 ${
               role === 'artisan'
                 ? 'border-secondary bg-secondary/5 text-secondary'
-                : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'
+                : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:text-gray-900'
             }`}
           >
             <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${role === 'artisan' ? 'bg-secondary/10' : 'bg-gray-100'}`}>
@@ -277,7 +277,7 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
             </div>
             <div>
               <p className="text-sm font-bold leading-tight">Artisan</p>
-              <p className="text-[11px] text-gray-400 leading-tight mt-0.5">Sell your craft</p>
+              <p className="text-[11px] text-gray-500 leading-tight mt-0.5">Sell your craft</p>
             </div>
           </button>
         </div>
@@ -549,7 +549,7 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
                   )}
                 </div>
                 {uploadError && <p className="text-[11px] text-red-600 font-semibold">{uploadError}</p>}
-                <p className="text-[11px] text-gray-400">JPG, PNG or WebP. Max size 5MB.</p>
+                <p className="text-[11px] text-gray-600">JPG, PNG or WebP. Max size 5MB.</p>
               </div>
             </div>
           </div>
@@ -577,12 +577,12 @@ export default function RegistrationForm({ onSwitchToLogin }: RegistrationFormPr
       </button>
 
       {onSwitchToLogin && (
-        <p className="text-center text-sm text-gray-500 mt-1">
+        <p className="text-center text-sm text-gray-600 mt-1">
           Already have an account?{' '}
           <button
             type="button"
             onClick={() => onSwitchToLogin()}
-            className="font-semibold text-primary hover:text-primary/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
+            className="font-semibold text-primary hover:text-primary/95 underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
           >
             Sign in
           </button>

@@ -49,7 +49,7 @@ export default function LoginPage() {
           <h1 className="font-serif text-3xl font-bold text-white leading-tight">
             {activeTab === 'login' ? 'Welcome Back' : 'Join the Collective'}
           </h1>
-          <p className="text-sm text-white/60 mt-2 font-sans">
+          <p className="text-sm text-white/80 mt-2 font-sans">
             {activeTab === 'login'
               ? 'Step into the boutique.'
               : 'Start your handcrafted journey.'}
@@ -78,7 +78,7 @@ export default function LoginPage() {
               className={`flex-1 py-4 text-sm font-bold tracking-wide transition-colors ${
                 activeTab === 'register'
                   ? 'text-gray-900 border-b-2 border-[#3a5244] bg-white'
-                  : 'text-gray-400 hover:text-gray-600 bg-gray-50/60'
+                  : 'text-gray-700 hover:text-gray-900 bg-gray-50/60'
               }`}
             >
               Create Account
@@ -112,11 +112,11 @@ export default function LoginPage() {
         </div>
 
         {/* Footer note */}
-        <p className="text-center text-[11px] text-white/40 mt-6 font-sans">
+        <p className="text-center text-[11px] text-white/70 mt-6 font-sans">
           By continuing, you agree to our{' '}
-          <Link href="/terms-of-service" className="hover:text-white/70 transition-colors">Terms of Service</Link>
+          <Link href="/terms-of-service" className="hover:text-white underline transition-colors">Terms of Service</Link>
           {' '}and{' '}
-          <Link href="/privacy-policy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>.
+          <Link href="/privacy-policy" className="hover:text-white underline transition-colors">Privacy Policy</Link>.
         </p>
       </div>
     </div>
